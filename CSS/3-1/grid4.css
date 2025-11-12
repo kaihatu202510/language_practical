@@ -1,0 +1,36 @@
+.container {
+  display: grid;
+  grid-template:
+    "header header header header header header header" 100px
+    "...... ...... ...... ...... ...... ...... ......" 20px
+    "...... left   ...... center ...... right  ......" auto
+    "...... ...... ...... ...... ...... ...... ......" 30px
+    "footer footer footer footer footer footer footer" 200px
+    / 1fr   100px  40px   auto   40px   120px  1fr;
+}
+
+/* 子 */
+.header {
+  grid-area: header;
+  background-color: red;
+}
+
+.left {
+  grid-area: left;
+  background-color: blue;
+}
+
+.center {
+  grid-area: center;
+  background-color: green;
+}
+
+.right {
+  grid-area: right;
+  background-color: yellow;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: orange;
+}
