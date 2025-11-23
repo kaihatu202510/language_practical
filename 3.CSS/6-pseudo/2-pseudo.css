@@ -1,0 +1,44 @@
+.btn {
+  padding: 10px 20px; /* ボタンの内側余白を設定（上下10px・左右20px） */
+  color: white; /* テキストの色を白に設定 */
+  background: #34d399; /* 背景色を明るい緑（#34d399）に設定 */
+  border: none; /* 枠線を消す */
+  border-radius: 8px; /* ボタンの角を8px丸くする（やわらかい印象） */
+}
+
+.btn:hover {
+  background: #2bb07b; /* マウスを乗せたときに、背景を少し濃い緑に変更（ホバー効果） */
+}
+
+input {
+  padding: 8px; /* 入力欄の内側余白を8pxに設定（テキストと枠の距離を確保） */
+  outline: none; /* フォーカス時のデフォルトの青い枠を非表示にする */
+  border: 2px solid #ccc; /* グレーの2px実線枠を表示 */
+  border-radius: 6px; /* 角を6px丸める */
+}
+
+input:focus {
+  border-color: #34d399; /* 入力欄をクリック・選択したときに枠線を緑色に変更 */
+  box-shadow: 0 0 5px #34d399; /* 緑色の光をぼかして表示（フォーカスを強調） */
+}
+
+li:first-child {
+  color: red; /* リストの最初の項目（1番目）を赤色にする */
+}
+
+li:last-child {
+  color: purple; /* リストの最後の項目（最終行）を紫色にする */
+}
+
+label {
+  display: inline-flex; /* ラベルの中の要素（チェックボックスと文字）を横並びに整列できるようにする */
+  gap: 4px; /* チェックボックスと文字の間に4pxの余白をつける */
+  align-items: center; /* 縦方向の中央揃えにする（見た目を整える） */
+  border: 1px solid transparent; /* 枠線を透明にして初期状態を安定させる（後で変化させるため） */
+}
+
+label:has(input:checked) {
+  background: rgb(52 211 153 / 15%); /* チェックされたときに淡い緑の背景を表示 */
+  border: 1px solid #34d399; /* 緑色の枠線を表示 */
+  border-radius: 8px; /* 角を8px丸くして柔らかい印象に */
+}

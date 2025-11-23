@@ -1,0 +1,14 @@
+.container {
+  display: flex; /* 要素をフレックスボックスレイアウトにする（子要素を柔軟に横方向へ並べられるようにする） */
+  /* justify-content: flex-start; 子要素を左寄せで配置（デフォルト設定） */
+  /* justify-content: flex-end; */
+  /* justify-content: center; */
+  /* justify-content: space-between; */
+  justify-content: space-evenly;
+  width: 500px; /* コンテナの横幅を500pxに設定 */
+  border: 1px solid #000; /* コンテナ全体の外枠に黒い1pxの実線をつける */
+}
+
+.item {
+  border: 1px solid #000; /* 各アイテムの周囲に黒い1pxの実線をつける（アイテムの位置を確認しやすくする） */
+}

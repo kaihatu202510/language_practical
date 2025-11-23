@@ -1,0 +1,21 @@
+<!DOCTYPE html> <!-- この文書がHTML5で書かれていることを宣言 -->
+
+<html> <!-- HTML文書の開始 -->
+
+<head> <!-- ページの設定や外部ファイルの読み込みなどを行う部分 -->
+  <title>株式会社アールピーシー</title> <!-- ブラウザのタブに表示されるタイトル -->
+  <meta charset="UTF-8" /> <!-- 文字コードをUTF-8（日本語対応）に設定 -->
+  <link rel="stylesheet" href="3-grid.css" /> <!-- 外部CSSファイル「3-grid.css」を読み込む -->
+</head>
+
+<body> <!-- ページに実際に表示される内容（本文部分） -->
+  <div class="container"> <!-- グリッドレイアウト全体を囲む親要素（コンテナ） -->
+
+    <div class="itemA">1fr</div> <!-- 1列目に配置。幅は「1fr」（可変領域1単位） -->
+    <div class="itemB">auto指定の中身を長くしてみる</div> <!-- 2列目に配置。幅は「auto」（中身の文字幅に合わせて自動調整） -->
+    <div class="itemC">2fr</div> <!-- 3列目に配置。幅は「2fr」（可変領域2単位＝左の倍の幅） -->
+
+  </div> <!-- コンテナ終了 -->
+</body>
+
+</html> <!-- HTML文書の終了 -->

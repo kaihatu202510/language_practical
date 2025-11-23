@@ -1,0 +1,23 @@
+/* コンテナ要素のデザイン指定 */
+.container {
+  display: grid; /* 要素をグリッドレイアウトにする（親要素をグリッドコンテナとして定義） */
+  grid-template-columns: 1fr auto 2fr; /* 列幅を3列に設定：左が1fr（可変）、中央がauto（中身に合わせる）、右が2fr（左の2倍の幅） */
+  height: 280px; /* コンテナ全体の高さを280pxに固定 */
+}
+
+/* アイテム要素のデザイン指定 */
+
+/* アイテムAのデザイン指定 */
+.itemA {
+  background-color: #f28b82; /* 背景色をやさしい赤（#f28b82）に設定 */
+}
+
+/* アイテムBのデザイン指定 */
+.itemB {
+  background-color: #aecbfa; /* 背景色をやさしい青（#aecbfa）に設定 */
+}
+
+/* アイテムCのデザイン指定 */
+.itemC {
+  background-color: #ccff90; /* 背景色をやさしい緑（#ccff90）に設定 */
+}

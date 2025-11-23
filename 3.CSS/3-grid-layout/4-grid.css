@@ -1,0 +1,37 @@
+/* コンテナ要素のデザイン指定 */
+.layout {
+  display: grid; /* 要素をグリッドレイアウトにする（子要素をマス目状に配置できるようにする） */
+  grid-template: /* グリッドの構成（行・列・エリア名）をまとめて定義するプロパティ */
+    "header header header" auto /* 1行目：3列すべてをヘッダーで占め、高さは自動(auto) */
+    "...... ...... ......" 10px /* 2行目：空白行（点は何も配置しない）。高さ10pxの余白として利用 */
+    "side   ...... main  " minmax(200px, 1fr) /* 3行目：左にサイド、中央は空白、右にメイン。高さは最小200px〜最大1frで可変 */
+    "...... ...... ......" 10px /* 4行目：空白行。高さ10pxの余白 */
+    "footer footer footer" auto /* 5行目：3列すべてをフッターで占め、高さは自動(auto) */
+    / 260px 10px 1fr; /* 列幅：左から260px、10px（隙間）、右が残りスペースいっぱい(1fr) */
+}
+
+/* アイテム要素のデザイン指定 */
+
+/* ヘッダー部分のデザイン */
+.site-header {
+  grid-area: header; /* grid-templateで指定した "header" のエリアに配置 */
+  background-color: #f28b82; /* 背景色をやさしい赤（#f28b82）に設定 */
+}
+
+/* サイドメニュー部分のデザイン */
+.sidebar {
+  grid-area: side; /* "side" のエリアに配置（左側） */
+  background-color: #aecbfa; /* 背景色をやさしい青（#aecbfa）に設定 */
+}
+
+/* メインコンテンツ部分のデザイン */
+.main {
+  grid-area: main; /* "main" のエリアに配置（右側のメイン領域） */
+  background-color: #ccff90; /* 背景色をやさしい緑（#ccff90）に設定 */
+}
+
+/* フッター部分のデザイン */
+.site-footer {
+  grid-area: footer; /* "footer" のエリアに配置（最下部に表示） */
+  background-color: #fff475; /* 背景色をやさしい黄色（#fff475）に設定 */
+}
