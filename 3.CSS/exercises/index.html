@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja"> 
+<head>
+    <title>株式会社アールピーシー</title> 
+    <meta charset="UTF-8" /> 
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <span class="site-header__logo">R</span>RPCホーム
+        </header>
+
+        <aside class="sidebar">
+            <div class="sidebar__accordion">
+                <div class="sidebar__accordion-title">
+                    ジャンプ先
+                </div>
+                           
+                <nav class="sidebar__accordion-container">
+                    <ul>
+                        <li class="sidebar__link">
+                            <a href="#card">カード<span class="sidebar__link-icon">>></span></a>
+                        </li>
+                        <li class="sidebar__link">
+                            <a href="#form">フォーム<span class="sidebar__link-icon">>></span></a>
+                        </li>
+                        <li class="sidebar__link">
+                            <a href="#flexbox">FlexBox<span class="sidebar__link-icon">>></span></a>
+                        </li>
+                        <li class="sidebar__link">
+                            <a href="#responsive">レスポンシブ<span class="sidebar__link-icon">>></span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <nav class="sidebar__nav">
+                <ul class="sidebar__ul">
+                    <li class="sidebar__link" >
+                        <a href="#card">カード<span class="sidebar__link-icon">>></span></a>
+                    </li>
+                    <li class="sidebar__link" >
+                        <a href="#form">フォーム<span class="sidebar__link-icon">>></span></a>
+                    </li>
+                    <li class="sidebar__link" >
+                        <a href="#flexbox">FlexBox<span class="sidebar__link-icon">>></span></a>
+                    </li>
+                    <li class="sidebar__link" >
+                        <a href="#responsive">レスポンシブ<span class="sidebar__link-icon">>></span></a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <div class="card">
+                <h2 id="card">デザイン</h2>
+                <div class="card__container">                    
+                    <div class="card__item">
+                        <div class="card__title">カード</div>
+                        <p>margin / border / padding / shadow / radius / background / typography</p>
+                        <div class="card__btn-box">
+                            <button class="card__btn">色のあるボタン</button>
+                            <button class="card__btn card__btn--ghost">色のないボタン</button>
+                            <button class="card__btn card__btn--disabled">無効ボタン</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form">
+                <h2 id="form">フォーム</h2>
+                <div >
+                    <div class="form__title" for="name">名前</div>
+                    <input class="form__area" type="text" id="name" name="name" placeholder="フォーカスで枠を強調">
+                </div>
+
+                <div class="form__area">
+                    <div class="form__title">性別（テキスト部分も選択可、チェックした項目は背景色を変化）</div>
+                    <div class="form__select">
+                        <label>
+                            <input type="radio" name="gender" value="male">男性
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female">女性
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="others">その他
+                        </label>
+                    </div>                  
+                </div>
+
+                <div>
+                    <div class="form__title">都道府県（フォーカスで枠を強調）</div>
+                    <select class="form__area" name="prefecture">
+                        <option value="1">北海道</option>
+                        <option value="2">青森県</option>
+                        <option value="3">岩手県</option>
+                        <option value="4">宮城県</option>
+                        <option value="5">秋田県</option>
+                        <option value="6">山形県</option>
+                        <option value="7">福島県</option>
+                        <option value="8">茨城県</option>
+                        <option value="9">栃木県</option>
+                        <option value="10">群馬県</option>
+                        <option value="11">埼玉県</option>
+                        <option value="12">千葉県</option>
+                        <option value="13">東京都</option>
+                        <option value="14">神奈川県</option>
+                        <option value="15">新潟県</option>
+                        <option value="16">富山県</option>
+                        <option value="17">石川県</option>
+                        <option value="18">福井県</option>
+                        <option value="19">山梨県</option>
+                        <option value="20">長野県</option>
+                        <option value="21">岐阜県</option>
+                        <option value="22">静岡県</option>
+                        <option value="23">愛知県</option>
+                        <option value="24">三重県</option>
+                        <option value="25">滋賀県</option>
+                        <option value="26">京都府</option>
+                        <option value="27">大阪府</option>
+                        <option value="28">兵庫県</option>
+                        <option value="29">奈良県</option>
+                        <option value="30">和歌山県</option>
+                        <option value="31">鳥取県</option>
+                        <option value="32">島根県</option>
+                        <option value="33">岡山県</option>
+                        <option value="34">広島県</option>
+                        <option value="35">山口県</option>
+                        <option value="36">徳島県</option>
+                        <option value="37">香川県</option>
+                        <option value="38">愛媛県</option>
+                        <option value="39">高知県</option>
+                        <option value="40">福岡県</option>
+                        <option value="41">佐賀県</option>
+                        <option value="42">長崎県</option>
+                        <option value="43">熊本県</option>
+                        <option value="44">大分県</option>
+                        <option value="45">宮崎県</option>
+                        <option value="46">鹿児島県</option>
+                        <option value="47">沖縄県</option>
+                    </select>
+                </div>
+
+                <div class="form__area">
+                    <div class="form__title">完了課題（テキスト部分も選択可、チェックした項目は背景色を変化）</div>
+                    <div class="form__select">
+                        <label>
+                            <input type="checkbox" name="language" value="html">HTML
+                        </label>
+                        <label>
+                            <input type="checkbox" name="language" value="css">CSS
+                        </label>
+                        <label>
+                            <input type="checkbox" name="language" value="js">JavaScript
+                        </label>
+                    </div>                  
+                </div>
+
+                <div >
+                    <div class="form__title" for="introduce">自己紹介</div>
+                    <textarea class="form__area" id="introduce" rows="6" name="introduce" placeholder="フォーカスで枠を強調"></textarea>
+                </div>
+            </div>
+
+            <div class="flexbox">
+                <div id="flexbox" class="flexbox__title">FlexBox</div>
+                <div class="flexbox__container">
+                    <div class="flexbox__item">#css</div>
+                    <div class="flexbox__item">#html</div>
+                    <div class="flexbox__item">#javascript</div>
+                    <div class="flexbox__item">#Flexbox</div>
+                    <div class="flexbox__item">#Grid</div>
+                    <div class="flexbox__item">#MediaQueries</div>
+                    <div class="flexbox__item">#ContainerQueries</div>
+                </div>
+            </div>
+
+            <div class="responsive">
+                <div id="responsive" class="responsive__title">カードレイアウトでレスポンシブ</div>
+                <div class="responsive__container">
+                    <div class="responsive__card">
+                        <div class="responsive__card-title">Card A</div>
+                        <div>space-betweenで等間隔</div>
+                    </div>
+                    <div class="responsive__card">
+                        <div class="responsive__card-title">Card B</div>
+                        <div>720pxで並び変化</div>
+                    </div>
+                    <div class="responsive__card">
+                        <div class="responsive__card-title">Card C</div>
+                        <div>フォーカスで枠を強調</div>
+                    </div>
+                    <div class="responsive__card">
+                        <div class="responsive__card-title">Card D</div>
+                        <div>影と角丸でおしゃれに</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div>©RPC</div>
+            <a class="site-footer__link" href="#top">ページ上部へ</a>
+        </footer>
+    </div>
+</body>
