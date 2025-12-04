@@ -324,8 +324,7 @@ body{
     position: relative;
   }
 
-  .sidebar__accordion:hover .sidebar__accordion-container,
-  .sidebar__accordion-container:hover{
+  .sidebar__accordion:hover .sidebar__accordion-container{
     display: flex;
   }
 
