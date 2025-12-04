@@ -86,15 +86,20 @@ body{
 .sidebar__ul{
     display: flex;
     flex-direction: column;
-    gap: var(--space3);
 }
 
-.sidebar__link{
+.sidebar__list{
     display: flex;
-    position: relative;    
+    position: relative;
+    padding: var(--space2) var(--space2);
+    border-radius: 8px;
 }
 
-.sidebar__link::before{
+.sidebar__list:hover{
+    background-color: var(--color-assort);
+}
+
+.sidebar__list::before{
     width: 8px;
     height: 24px;
     margin-right: var(--space2);
@@ -102,16 +107,24 @@ body{
     background: var(--color-secondary);
 }
 
-.sidebar__link a{
+.sidebar__link{
+    position: relative;
     width: 100%;
     justify-content: space-between;
     text-decoration: none;
     color: var(--color-text);    
 }
 
-.sidebar__link-icon{
+.sidebar__link::before{
     position: absolute;
-    right: 12px;
+    content: ">";
+    right: 0;
+}
+
+.sidebar__link::after{
+    position: absolute;
+    content: ">";
+    right: 10px;
 }
 
 /* メインコンテンツ */
@@ -233,7 +246,6 @@ body{
 .flexbox__container{
     display: flex;
     gap: 8px;
-
 }
 
 .flexbox__item{
@@ -312,7 +324,8 @@ body{
     position: relative;
   }
 
-  .sidebar__accordion:hover .sidebar__accordion-container{
+  .sidebar__accordion:hover .sidebar__accordion-container,
+  .sidebar__accordion-container:hover{
     display: flex;
   }
 
@@ -340,11 +353,11 @@ body{
     display: none;
   }
 
-  .sidebar__link{
+  .sidebar__list{
     padding: var(--space2);
   }
 
-  .sidebar__link:hover{
+  .sidebar__list:hover{
     background-color: var(--color-assort);
     border-radius: 8px;
   }
