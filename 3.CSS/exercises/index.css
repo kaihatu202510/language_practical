@@ -115,16 +115,10 @@ body{
     color: var(--color-text);    
 }
 
-.sidebar__link::before{
-    position: absolute;
-    content: ">";
-    right: 0;
-}
-
 .sidebar__link::after{
     position: absolute;
-    content: ">";
-    right: 10px;
+    content: "> >";
+    right: 0;
 }
 
 /* メインコンテンツ */
