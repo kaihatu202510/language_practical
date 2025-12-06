@@ -1,0 +1,20 @@
+p::before{
+    content: "★";
+}
+p::after{
+    content: "☆";
+}
+
+.title {
+  display: flex; /* フレックスボックスを有効にする。疑似要素（::before, ::after）とテキストを横並びに配置できるようにする */
+  gap: 8px; /* 子要素（疑似要素とテキスト）の間に8pxのすき間を作る */
+  align-items: center; /* フレックス軸（縦方向）で中央揃えにし、縦線と文字の高さをそろえる */
+}
+
+.title::before,
+.title::after {
+  width: 8px; /* 疑似要素の横幅を8pxに設定（細い縦帯になる） */
+  height: 34px; /* 疑似要素の高さを34pxに設定（テキストと揃うくらいの高さ） */
+  content: ""; /* 疑似要素を生成する（空の内容でも必須） */
+  background: #f28b82; /* 背景色をやさしい赤（ピンク系）に設定し、縦線を表現する */
+}

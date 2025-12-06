@@ -1,0 +1,14 @@
+.container {
+  display: flex; /* フレックスボックスレイアウトを有効にする（子要素を柔軟に並べられるようにする） */
+  /* align-items: flex-start; 子要素をコンテナの上端（上揃え）に配置 */
+  /* align-items: stretch; */
+  align-items: flex-end;
+  align-items: center;
+  width: 500px; /* コンテナ全体の横幅を500pxに設定 */
+  height: 100px; /* コンテナ全体の高さを100pxに設定 */
+  border: 1px solid #000; /* コンテナの周囲に黒い1pxの実線枠を付ける（見た目の確認用） */
+}
+
+.item {
+  border: 1px solid #000; /* 各アイテムの周囲に黒い1pxの枠線を付ける（配置位置を見やすくする） */
+}

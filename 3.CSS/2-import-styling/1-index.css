@@ -1,0 +1,22 @@
+li{
+    color: blue;
+    display: inline;
+}
+
+table{
+  height: 120px;
+  width: 85%;
+  padding: 15px 30px;
+  margin: 30px 15px;
+}
+
+th {
+  background-color: #7BF;
+  font-weight: bold;
+  text-align: right;
+}
+
+a {
+  text-decoration: none;
+  font-size:larger;
+}

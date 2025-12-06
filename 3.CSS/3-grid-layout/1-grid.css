@@ -1,0 +1,34 @@
+/* コンテナ要素のデザイン指定 */
+.container {
+  display: grid; /* 要素をグリッドレイアウトとして配置する（親要素をグリッドコンテナにする） */
+  grid-template-rows: 180px 100px; /* 行（row）の高さを上から順に180px、100pxに設定 */
+  grid-template-columns: 800px 1fr 1fr; /* 列（column）の幅を左から800px、残りのスペースを1frずつで均等に割る */
+}
+
+/* アイテムAのデザイン指定 */
+.itemA {
+  grid-row: 1/3; /* 1行目から3行目まで（＝2行分）縦にまたがって配置 */
+  grid-column: 1/2; /* 1列目に配置（左端） */
+  background-color: #f28b82; /* 背景色をやわらかい赤（#f28b82）に設定 */
+}
+
+/* アイテムBのデザイン指定 */
+.itemB {
+  grid-row: 1/2; /* 1行目に配置（1行分だけ） */
+  grid-column: 2/3; /* 2列目に配置 */
+  background-color: #aecbfa; /* 背景色をやさしい青（#aecbfa）に設定 */
+}
+
+/* アイテムCのデザイン指定 */
+.itemC {
+  grid-row: 1/2; /* 1行目に配置（1行分） */
+  grid-column: 3/4; /* 3列目に配置（右上） */
+  background-color: #ccff90; /* 背景色をやさしい緑（#ccff90）に設定 */
+}
+
+/* アイテムDのデザイン指定 */
+.itemD {
+  grid-row: 2/3; /* 2行目に配置（下段） */
+  grid-column: 2/4; /* 2列目から4列目まで（＝横に2列分）またがる */
+  background-color: #fff475; /* 背景色をやさしい黄色（#fff475）に設定 */
+}
