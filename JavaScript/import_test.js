@@ -1,5 +1,3 @@
-// alert("test");
-
 window.onload = function(){
     document.getElementById('submit').addEventListener('click', function(){
         submitButton()
@@ -18,11 +16,17 @@ function submitButton(){
         case "minus":
             calcResult = textForm2 - textForm1
             break;
+        case "multiply":
+            calcResult = textForm1 * textForm2
+            break;
+        case "divide":
+            calcResult = textForm1 / textForm2
+            break;
         default:
             alert('calc type was not selected.')
             return false;
     }
-    alert('結果は' + calcResult + 'です');
+    document.getElementById('result_display').textContent = '結果は' + calcResult + 'です';
 }
 
 function getCalcType(){

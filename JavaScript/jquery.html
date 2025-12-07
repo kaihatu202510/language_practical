@@ -7,7 +7,7 @@
         <div class="text_input_container">
             <div>
                 <label for="text_form_1">入力欄①</label>
-                <input type="text" id="text_form_1" name="text_form_1">
+                <input type="text" id="text_form_1" name="text_form_1" autofocus>
             </div>
             <div>
                 <lable for="text_form_2">入力欄②</lable>
@@ -18,10 +18,21 @@
         <div class="radio_input_container">
             <input type="radio" id="radio_plus" name="radio_calc_type" value="plus">
             <label for="radio_plus">+</label>
+
             <input type="radio" id="radio_minus" name="radio_calc_type" value="minus">
             <label for="radio_minus">-</label>
+
+            <input type="radio" id="radio_multiply" name="radio_calc_type" value="multiply">
+            <lable for="radio_multiply">×</lable>
+
+            <input type="radio" id="radio_divide" name="radio_calc_type" value="divide">
+            <lable for="radio_divide">÷</lable>
         </div>
         <button id="submit">送信</button>
+        <div>
+            <div>-結果-</div>
+            <div id="result_display"></div>
+        </div>
         <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
         <script src="jquery_import_test.js"></script>
     </body>
