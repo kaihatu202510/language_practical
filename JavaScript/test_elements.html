@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>テストの要素</title>
+    </head>
+    <body>
+        <div class="element_class_1" id="element_id_1">1つ目の要素</div>
+        <div class="element_class_1" id="element_id_2">2つ目の要素</div>
+        <div class="element_class_1" id="element_id_3">3つ目の要素</div>
+        <div class="element_class_2" id="element_id_4">4つ目の要素</div>
+        <div class="element_class_2" id="element_id_5">5つ目の要素</div>
+        <div class="element_class_2" id="element_id_6">6つ目の要素</div>
+        <!-- <button name="button_1" value="1" onclick="displayButtonValue()">ボタン</button> -->
+        <button name="button_1" value="1" onclick="displayButtonValue(this)">ボタン</button>
+    </body>
+    <script>
+        // alert("test");
+        // console.log(document.getElementById('element_id_1').textContent);
+        document.getElementById('element_id_1').textContent = '100つ目の要素';
+
+        // function displayButtonValue(){
+        //     alert('test');
+        // }
+        function displayButtonValue(button){
+            debugger;
+            let buttonValue = button.value;
+            let additionalElement = document.createElement("div");
+            additionalElement.textContent = buttonValue;
+            button.parentNode.append(additionalElement);
+        }
+    </script>
+</html>
