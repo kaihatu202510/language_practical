@@ -1,0 +1,105 @@
+(1)
+postgres=# \l
+                                                               データベース一覧
+   名前    |  所有者  | エンコーディング | ロケールプロバイダー | 照合順序 | Ctype(変換演算子) | ロケール | ICUルール: |     アクセス権限
+-----------+----------+------------------+----------------------+----------+-------------------+----------+------------+-----------------------
+ postgres  | postgres | UTF8             | libc                 | C        | C                 |          |            |
+ template0 | postgres | UTF8             | libc                 | C        | C                 |          |            | =c/postgres          +
+           |          |                  |                      |          |                   |          |            | postgres=CTc/postgres
+ template1 | postgres | UTF8             | libc                 | C        | C                 |          |            | =c/postgres          +
+           |          |                  |                      |          |                   |          |            | postgres=CTc/postgres
+(3 行)
+
+
+postgres=# create database sql_education;
+CREATE DATABASE
+
+
+postgres=# \l
+                                                                 データベース一覧
+     名前      |  所有者  | エンコーディング | ロケールプロバイダー | 照合順序 | Ctype(変換演算子) | ロケール | ICUルール: |     アクセス権限
+---------------+----------+------------------+----------------------+----------+-------------------+----------+------------+-----------------------
+ postgres      | postgres | UTF8             | libc                 | C        | C                 |          |            |
+ sql_education | postgres | UTF8             | libc                 | C        | C                 |          |            |
+ template0     | postgres | UTF8             | libc                 | C        | C                 |          |            | =c/postgres          +
+               |          |                  |                      |          |                   |          |            | postgres=CTc/postgres
+ template1     | postgres | UTF8             | libc                 | C        | C                 |          |            | =c/postgres          +
+               |          |                  |                      |          |                   |          |            | postgres=CTc/postgres
+(4 行)
+
+
+postgres=# \c sql_education
+データベース"sql_education"にユーザー"postgres"として接続しました。
+
+
+sql_education=# select current_database(), current_schema();
+ current_database | current_schema
+------------------+----------------
+ sql_education    | public
+(1 行)
+
+
+sql_education=# \dn
+        スキーマ一覧
+  名前  |      所有者
+--------+-------------------
+ public | pg_database_owner
+(1 行)
+
+
+sql_education=# create schema sql_education;
+CREATE SCHEMA
+
+
+sql_education=# \dn
+        スキーマ一覧
+  名前  |      所有者
+--------+-------------------
+ public | pg_database_owner
+(1 行)
+
+
+SET
+
+
+sql_education=# select current_database(), current_schema();
+ current_database | current_schema
+------------------+----------------
+ sql_education    | sql_education
+(1 行)
+
+
+SET
+
+
+
+(2)
+sql_education=# create table account(
+sql_education(# account_id serial primary key,
+sql_education(# name character varying(50) not null);
+CREATE TABLE
+
+
+sql_education=# create table item(
+sql_education(# item_id serial primary key,
+sql_education(# name character varying(50) not null,
+sql_education(# price integer not null);
+CREATE TABLE
+
+
+sql_education=# create table order_info(
+sql_education(# order_info_id serial primary key,
+sql_education(# order_date date not null,
+sql_education(# account_id integer not null,
+sql_education(# foreign key (account_id) references account(account_id) on delete cascade);
+CREATE TABLE
+
+
+sql_education=# create table order_item(
+sql_education(# id serial primary key,
+sql_education(# order_id integer not null,
+sql_education(# item_id integer not null,
+sql_education(# quantity int not null,
+sql_education(# foreign key (order_id) references order_info(order_info_id) on delete cascade,
+sql_education(# foreign key (item_id) references item(item_id) on delete restrict);
+CREATE TABLE

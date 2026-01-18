@@ -1,0 +1,51 @@
+(1)
+\l
+
+create database sql_education;
+
+\l
+
+\c sql_education
+
+select current_database(), current_schema();
+
+\dn
+
+create schema sql_education;
+
+\dn
+
+set search_path to sql_education;
+
+select current_database(), current_schema();
+
+set search_path to public;
+
+
+
+(2)
+create table account(
+account_id serial primary key,
+name character varying(50) not null);
+
+
+create table item(
+item_id serial primary key,
+name character varying(50) not null,
+price integer not null);
+
+
+create table order_info(
+order_info_id serial primary key,
+order_date date not null,
+account_id integer not null,
+foreign key (account_id) references account(account_id) on delete cascade);
+
+
+create table order_item(
+id serial primary key,
+order_id integer not null,
+item_id integer not null,
+quantity int not null,
+foreign key (order_id) references order_info(order_info_id) on delete cascade,
+foreign key (item_id) references item(item_id) on delete restrict);

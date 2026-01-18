@@ -1,0 +1,43 @@
+(16)
+alter table order_info 
+add column is_canceled boolean not null default false;
+
+alter table order_item
+add column is_canceled boolean not null default false;
+
+
+(17)
+create table store(
+store_id serial primary key,
+name character varying(50) not null
+);
+// ダミーデータ挿入(課題で指定されていない)
+insert into store(name) 
+values('渋谷店'), ('新宿店');
+
+alter table order_info
+add column store_id integer;
+
+update order_info
+set store_id = 1;
+
+alter table order_info
+alter column store_id set not null,
+add constraint fk_order_info_store
+foreign key (store_id) 
+references store(store_id) 
+on delete cascade;
+
+
+
+(18)
+create table order_status(
+order_status_id serial primary key,
+name character varying(50) not null
+);
+//データ挿入（課題で指定されていない）
+insert into order_status(name)
+values('受付済'), ('発注済'), ('在庫確保済'), ('処理済');
+
+alter table order_info
+add column order_status_id integer not null default 1;
