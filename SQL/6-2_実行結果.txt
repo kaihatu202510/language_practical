@@ -185,36 +185,49 @@ sql_education-# where name in ('キャベツ', 'にんじん');
 
 
 (11)
-sql_education=# select name as 製品名, sum(quantity) as 注文合計数
-sql_education-# from order_item
-sql_education-# join item on order_item.item_id = item.item_id
-sql_education-# group by name;
+sql_education=# select
+sql_education-#   name as "製品名",
+sql_education-#   sum(quantity) as "注文合計数"
+sql_education-# from
+sql_education-#   order_item
+sql_education-#   join
+sql_education-#     item on order_item.item_id = item.item_id
+sql_education-# group by
+sql_education-#   name
+sql_education-# order by
+sql_education-#   注文合計数 desc;
      製品名     | 注文合計数
 ----------------+------------
- キャベツ       |          5
- 米             |          3
  卵             |         20
  カップラーメン |         14
- バナナ         |          7
- 牛乳           |          2
- にんじん       |          4
  食パン         |          7
+ バナナ         |          7
+ キャベツ       |          5
+ にんじん       |          4
+ 米             |          3
+ 牛乳           |          2
 (8 行)
 
 
 (12)
-sql_education=# select order_id as 注文ID, sum(price * quantity) as 合計金額
-sql_education-# from order_item
-sql_education-# join item on order_item.item_id = item.item_id
-sql_education-# group by order_id
-sql_education-# order by order_id;
- 注文id | 合計金額
+sql_education=# select
+sql_education-#   order_id as "注文ID",
+sql_education-#   sum(price * quantity) as "合計金額"
+sql_education-# from
+sql_education-#   order_item
+sql_education-#   join
+sql_education-#     item on order_item.item_id = item.item_id
+sql_education-# group by
+sql_education-#   order_id
+sql_education-# order by
+sql_education-#   合計金額 desc;
+ 注文ID | 合計金額
 --------+----------
-      1 |     2612
-      2 |     2170
+      5 |     5356
       3 |     3860
       4 |     2834
-      5 |     5356
+      1 |     2612
+      2 |     2170
 (5 行)
 
 

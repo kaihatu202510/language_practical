@@ -52,11 +52,12 @@ CREATE SCHEMA
 
 
 sql_education=# \dn
-        スキーマ一覧
-  名前  |      所有者
---------+-------------------
- public | pg_database_owner
-(1 行)
+           スキーマ一覧
+     名前      |      所有者
+---------------+-------------------
+ public        | pg_database_owner
+ sql_education | postgres
+(2 行)
 
 
 SET

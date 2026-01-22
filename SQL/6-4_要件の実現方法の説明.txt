@@ -96,7 +96,23 @@ IDおよびステータス名を持つ注文ステータステーブルを作成
 想定された注文ステータスを追加します。
 注文テーブルに注文ステータステーブルの注文ステータスIDを参照するカラムを追加します。
 デフォルト値は1(受付済み)とします。
+ステータスの増加の際はINSERT、減少の際はDELETEで対応します。
+追加例：
+insert into 
+  order_status(
+    name
+  )
+values(
+  '配送業者引渡し済'
+);
 
+削除例：
+delete from
+ order_status
+where
+ order_status_id = 5
+;
+  
 
 
 

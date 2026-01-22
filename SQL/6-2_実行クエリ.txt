@@ -80,18 +80,31 @@ where name in ('キャベツ', 'にんじん');
 
 
 (11)
-select name as 製品名, sum(quantity) as 注文合計数
-from order_item
-join item on order_item.item_id = item.item_id
-group by name;
+select
+  name as "製品名",
+  sum(quantity) as "注文合計数"
+from
+  order_item
+  join
+    item on order_item.item_id = item.item_id
+group by
+  name
+order by
+  注文合計数 desc;
 
 
 (12)
-select order_id as 注文ID, sum(price * quantity) as 合計金額
-from order_item
-join item on order_item.item_id = item.item_id
-group by order_id
-order by order_id;
+select
+  order_id as "注文ID",
+  sum(price * quantity) as "合計金額"
+from
+  order_item
+  join
+    item on order_item.item_id = item.item_id
+group by
+  order_id
+order by
+  合計金額 desc;
 
 
 (13)
