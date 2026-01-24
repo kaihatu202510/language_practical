@@ -1,0 +1,51 @@
+(16)
+sql_education=# alter table order_info
+sql_education-# add column is_canceled boolean not null default false;
+ALTER TABLE
+
+sql_education=# alter table order_item
+sql_education-# add column is_canceled boolean not null default false;
+ALTER TABLE
+
+
+(17)
+sql_education=# create table store(
+sql_education(# store_id serial primary key,
+sql_education(# name character varying(50) not null
+sql_education(# );
+CREATE TABLE
+
+sql_education=# insert into store(name) values('渋谷店'), ('新宿店');
+INSERT 0 2
+
+sql_education=# alter table order_info
+sql_education-# add column store_id integer;
+ALTER TABLE
+
+sql_education=# update order_info
+sql_education-# set store_id = 1;
+UPDATE 5
+
+sql_education=# alter table order_info
+sql_education-# alter column store_id set not null,
+sql_education-# add constraint fk_order_info_store
+sql_education-# foreign key (store_id)
+sql_education-# references store(store_id)
+sql_education-# on delete cascade;
+ALTER TABLE
+
+
+
+(18)
+sql_education=# create table order_status(
+sql_education(# order_status_id serial primary key,
+sql_education(# name character varying(50) not null
+sql_education(# );
+CREATE TABLE
+sql_education=# insert into order_status(name)
+sql_education-# values('受付済'), ('発注済'), ('在庫確保済'), ('処理済');
+INSERT 0 4
+
+sql_education=# alter table order_info
+sql_education-# add column order_status_id integer not null default 1;
+ALTER TABLE

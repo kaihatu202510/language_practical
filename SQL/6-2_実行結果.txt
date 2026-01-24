@@ -1,0 +1,246 @@
+(3)
+sql_education=# insert into account(name)
+sql_education-# values
+sql_education-# ('ac1'),
+sql_education-# ('ac2');
+INSERT 0 2
+
+sql_education=# select * from account;
+ account_id | name
+------------+------
+          1 | ac1
+          2 | ac2
+(2 行)
+
+
+(4)
+sql_education=# insert into item(name, price) values('牛乳', 198);
+INSERT 0 1
+sql_education=# insert into item(name, price) values('食パン', 158);
+INSERT 0 1
+sql_education=# insert into item(name, price) values('卵', 228);
+INSERT 0 1
+sql_education=# insert into item(name, price) values('米', 1980);
+INSERT 0 1
+
+sql_education=# select * from item;
+ item_id |      name      | price
+---------+----------------+-------
+       1 | 牛乳           |   198
+       2 | 食パン         |   158
+       3 | 卵             |   228
+       4 | 米             |  1980
+(4 行)
+
+
+(5)
+sql_education=# insert into item(name, price)
+sql_education-# values
+sql_education-# ('にんじん', 58),
+sql_education-# ('バナナ', 198),
+sql_education-# ('カップラーメン', 158),
+sql_education-# ('キャベツ', 200);
+INSERT 0 4
+
+
+sql_education=# select * from item;
+ item_id |      name      | price
+---------+----------------+-------
+       1 | 牛乳           |   198
+       2 | 食パン         |   158
+       3 | 卵             |   228
+       4 | 米             |  1980
+       5 | にんじん       |    58
+       6 | バナナ         |   198
+       7 | カップラーメン |   158
+       8 | キャベツ       |   200
+(8 行)
+
+
+(6)
+sql_education=# insert into order_info(order_date, account_id) values('2024-12-30', 1);
+INSERT 0 1
+sql_education=# insert into order_info(order_date, account_id) values('2025-01-20', 1);
+INSERT 0 1
+sql_education=# insert into order_info(order_date, account_id) values('2024-12-31', 2);
+INSERT 0 1
+sql_education=# insert into order_info(order_date, account_id) values('2025-01-20', 2);
+INSERT 0 1
+sql_education=# insert into order_info(order_date, account_id) values('2025-04-01', 2);
+INSERT 0 1
+
+sql_education=# select * from order_info;
+ order_info_id | order_date | account_id
+---------------+------------+------------
+             1 | 2024-12-30 |          1
+             2 | 2025-01-20 |          1
+             3 | 2024-12-31 |          2
+             4 | 2025-01-20 |          2
+             5 | 2025-04-01 |          2
+(5 行)
+
+
+sql_education=# insert into order_item(order_id, item_id, quantity) values(1, 2, 2);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(1, 4, 1);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(1, 7, 2);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(2, 5, 4);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(2, 6, 5);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(2, 7, 6);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(3, 3, 10);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(3, 7, 5);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(3, 2, 5);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(4, 3, 10);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(4, 7, 1);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(4, 6, 2);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(5, 8, 5);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(5, 4, 2);
+INSERT 0 1
+sql_education=# insert into order_item(order_id, item_id, quantity) values(5, 1, 2);
+INSERT 0 1
+
+
+sql_education=# select * from order_item;
+ id | order_id | item_id | quantity
+----+----------+---------+----------
+  1 |        1 |       2 |        2
+  2 |        1 |       4 |        1
+  3 |        1 |       7 |        2
+  4 |        2 |       5 |        4
+  5 |        2 |       6 |        5
+  6 |        2 |       7 |        6
+  7 |        3 |       3 |       10
+  8 |        3 |       7 |        5
+  9 |        3 |       2 |        5
+ 10 |        4 |       3 |       10
+ 11 |        4 |       7 |        1
+ 12 |        4 |       6 |        2
+ 13 |        5 |       8 |        5
+ 14 |        5 |       4 |        2
+ 15 |        5 |       1 |        2
+(15 行)
+
+
+(7)
+sql_education=# select item_id as 製品ID, name as 製品名, price as 値段
+sql_education-# from item
+sql_education-# where price < 200
+sql_education-# order by price desc;
+ 製品id |     製品名     | 値段
+--------+----------------+------
+      1 | 牛乳           |  198
+      6 | バナナ         |  198
+      2 | 食パン         |  158
+      7 | カップラーメン |  158
+      5 | にんじん       |   58
+(5 行)
+
+
+(8)
+sql_education=# select count(*)
+sql_education-# from order_info
+sql_education-# where order_date between '2024-01-01' and '2024-12-31';
+ count
+-------
+     2
+(1 行)
+
+
+(9)
+sql_education=# select order_date as ac1の注文日付
+sql_education-# from order_info
+sql_education-# where account_id = (
+sql_education(# select account_id
+sql_education(# from account
+sql_education(# where name = 'ac1');
+   注文日
+------------
+ 2024-12-30
+ 2025-01-20
+(2 行)
+
+
+(10)
+sql_education=# select order_id as 注文ID
+sql_education-# from order_item
+sql_education-# join item on order_item.item_id = item.item_id
+sql_education-# where name in ('キャベツ', 'にんじん');
+ 注文id
+--------
+      2
+      5
+(2 行)
+
+
+(11)
+sql_education=# select
+sql_education-#   name as "製品名",
+sql_education-#   sum(quantity) as "注文合計数"
+sql_education-# from
+sql_education-#   order_item
+sql_education-#   join
+sql_education-#     item on order_item.item_id = item.item_id
+sql_education-# group by
+sql_education-#   name
+sql_education-# order by
+sql_education-#   注文合計数 desc;
+     製品名     | 注文合計数
+----------------+------------
+ 卵             |         20
+ カップラーメン |         14
+ 食パン         |          7
+ バナナ         |          7
+ キャベツ       |          5
+ にんじん       |          4
+ 米             |          3
+ 牛乳           |          2
+(8 行)
+
+
+(12)
+sql_education=# select
+sql_education-#   order_id as "注文ID",
+sql_education-#   sum(price * quantity) as "合計金額"
+sql_education-# from
+sql_education-#   order_item
+sql_education-#   join
+sql_education-#     item on order_item.item_id = item.item_id
+sql_education-# group by
+sql_education-#   order_id
+sql_education-# order by
+sql_education-#   合計金額 desc;
+ 注文ID | 合計金額
+--------+----------
+      5 |     5356
+      3 |     3860
+      4 |     2834
+      1 |     2612
+      2 |     2170
+(5 行)
+
+
+(13)
+sql_education=# select account.account_id as ユーザーID, account.name as ユーザー名, sum(quantity * price) as 合計金額
+sql_education-# from account
+sql_education-# join order_info on account.account_id = order_info.account_id
+sql_education-# join order_item on order_info.order_info_id = order_item.order_id
+sql_education-# join item on order_item.item_id = item.item_id
+sql_education-# group by account.account_id
+sql_education-# order by account.account_id;
+ ユーザーid | ユーザー名 | 合計金額
+------------+------------+----------
+          1 | ac1        |     4782
+          2 | ac2        |    12050
+(2 行)

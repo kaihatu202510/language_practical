@@ -1,0 +1,118 @@
+(3)
+insert into account(name)
+values
+('ac1'),
+('ac2');
+select * from account;
+
+
+(4)
+insert into item(name, price) values('牛乳', 198);
+insert into item(name, price) values('食パン', 158);
+insert into item(name, price) values('卵', 228);
+insert into item(name, price) values('米', 1980);
+select * from item;
+
+
+(5)
+insert into item(name, price)
+values
+('にんじん', 58),
+('バナナ', 198),
+('カップラーメン', 158),
+('キャベツ', 200);
+select * from item;
+
+
+(6)
+insert into order_info(order_date, account_id) values('2024-12-30', 1);
+insert into order_info(order_date, account_id) values('2025-01-20', 1);
+insert into order_info(order_date, account_id) values('2024-12-31', 2);
+insert into order_info(order_date, account_id) values('2025-01-20', 2);
+insert into order_info(order_date, account_id) values('2025-04-01', 2);
+select * from order_info;
+
+insert into order_item(order_id, item_id, quantity) values(1, 2, 2);
+insert into order_item(order_id, item_id, quantity) values(1, 4, 1);
+insert into order_item(order_id, item_id, quantity) values(1, 7, 2);
+insert into order_item(order_id, item_id, quantity) values(2, 5, 4);
+insert into order_item(order_id, item_id, quantity) values(2, 6, 5);
+insert into order_item(order_id, item_id, quantity) values(2, 7, 6);
+insert into order_item(order_id, item_id, quantity) values(3, 3, 10);
+insert into order_item(order_id, item_id, quantity) values(3, 7, 5);
+insert into order_item(order_id, item_id, quantity) values(3, 2, 5);
+insert into order_item(order_id, item_id, quantity) values(4, 3, 10);
+insert into order_item(order_id, item_id, quantity) values(4, 7, 1);
+insert into order_item(order_id, item_id, quantity) values(4, 6, 2);
+insert into order_item(order_id, item_id, quantity) values(5, 8, 5);
+insert into order_item(order_id, item_id, quantity) values(5, 4, 2);
+insert into order_item(order_id, item_id, quantity) values(5, 1, 2);
+select * from order_item;
+
+
+(7)
+select item_id as 製品ID, name as 製品名, price as 値段
+from item
+where price < 200
+order by price desc;
+
+
+(8)
+select count(*)
+from order_info
+where order_date between '2024-01-01' and '2024-12-31';
+
+
+(9)
+select order_date as ac1の注文日付
+from order_info
+where account_id = (
+select account_id
+from account
+where name = 'ac1');
+
+
+(10)
+select order_id as 注文ID
+from order_item
+join item on order_item.item_id = item.item_id
+where name in ('キャベツ', 'にんじん');
+
+
+(11)
+select
+  name as "製品名",
+  sum(quantity) as "注文合計数"
+from
+  order_item
+  join
+    item on order_item.item_id = item.item_id
+group by
+  name
+order by
+  注文合計数 desc;
+
+
+(12)
+select
+  order_id as "注文ID",
+  sum(price * quantity) as "合計金額"
+from
+  order_item
+  join
+    item on order_item.item_id = item.item_id
+group by
+  order_id
+order by
+  合計金額 desc;
+
+
+(13)
+select account.account_id as ユーザーID, account.name as ユーザー名, sum(quantity * price) as 合計金額
+from account
+join order_info on account.account_id = order_info.account_id
+join order_item on order_info.order_info_id = order_item.order_id
+join item on order_item.item_id = item.item_id
+group by account.account_id
+order by account.account_id;
+

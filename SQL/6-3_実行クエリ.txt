@@ -1,0 +1,22 @@
+(14)
+begin;
+
+insert into account(name) values('ac3'), ('ac4');
+select * from account;
+
+rollback;
+
+select * from account;
+
+
+
+(15)
+begin;
+insert into account(name) values('ac3'), ('ac4');
+select * from account;
+
+(非トランザクション)select * from account;
+
+commit;
+
+(非トランザクション)select * from account;
