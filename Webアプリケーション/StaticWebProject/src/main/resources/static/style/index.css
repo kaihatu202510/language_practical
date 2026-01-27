@@ -1,0 +1,192 @@
+/* リセット */
+*{
+    box-sizing: border-box;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+.layout {
+  display: grid;
+  grid-template:
+    "header header header" 50px
+    "...... ...... ......" 10px
+    "...... index   ......" minmax(900px, 1fr)
+    "...... ...... ......" 10px
+    "footer footer footer" 50px
+    / auto minmax(400px, 800px) auto;
+}
+
+/* 共通 */
+.btn{
+  height: 40px;
+  padding: 8px 32px;
+  border: none;
+  border-radius: 8px;
+}
+
+.btn:hover{
+  cursor: pointer;
+}
+
+.positive-btn{
+  background-color: #6abd74;
+  color: white;
+}
+
+.positive-btn:hover{
+	cursor: pointer;
+	background-color: #52935a;
+}
+
+.negative-btn{
+  background-color: #e76969;
+  color: white;
+}
+
+.negative-btn:hover{
+  cursor: pointer;
+  background-color: #9e4747;
+}
+
+/* ヘッダー*/
+#header {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  background-color: #bbd188;
+}
+
+.header__logo{
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  background-color: lightseagreen;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 24px;
+  color: white;
+  font-weight: normal;
+}
+
+/*メイン*/
+.main {
+  grid-area: index;
+  padding: 24px;
+  background-color: #f2f6da;
+  border-radius: 8px;
+}
+
+
+/* index画面 */
+.index__label{    
+  margin-bottom: 4px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.index__container{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.index__card{
+  width: 200px;    
+  padding: 16px;
+  border: solid 1px #dcdfe5;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgb(4 7 10 / 12%);
+	background-color: white;
+}
+
+.index__card-label{
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.index__card-images{
+	max-width: 100%;
+	height: auto;
+}
+
+
+/* B画面 */
+.form{
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.form__field{
+	padding: 8px;
+	border: solid 1px #bbd188;
+	border-radius: 8px;
+	background-color: #e3eb98;
+}
+
+.form__label{
+	margin-bottom: 8px;
+}
+
+.form__control{
+	width: 100%;
+	padding: 8px;
+	border-radius: 8px;	
+}
+
+.form__actions{
+  display: flex;  
+  margin-top: 8px;
+}
+
+.form__display{
+  padding: 8px 32px;
+}
+
+/* C画面 */
+.variable__actions{
+  display: flex;
+  justify-content: space-evenly;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.variable__table{
+  width: 100%;
+}
+
+.variable__th-index{
+  width: 20%;
+  padding: 4px;
+  background-color: #bbd188;
+}
+
+.variable__th-content{
+  width: 80%;
+  padding: 4px;
+  background-color: #bbd188;
+}
+
+.variable__td-index{
+  text-align: center;
+  padding: 4px;
+  border-bottom: solid 2px #bbd188;
+}
+
+.variable__td-content{
+  padding: 4px;
+  border-bottom: solid 2px #bbd188;
+}
+
+/* フッター*/
+#footer {
+  grid-area: footer;
+  background-color: #bbd188;
+}

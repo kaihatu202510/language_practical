@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>トップ</title>
+  <link rel="stylesheet" href="/style/index.css" />
+  <script defer src="/js/script.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div id="header"></div>
+		
+		<main class="main">
+			<div class="variable">
+				<div class="variable__actions">
+					<button id="js-variable__add-row" class="btn positive-btn">追加</button>
+					<button id="js-variable__remove-row" class="btn negative-btn">削除</button>
+				</div>
+				
+				<table class="variable__table">
+					<thead>
+						<tr>
+							<th class="variable__th-index">連番</th>
+							<th class="variable__th-content">内容</th>
+						</tr>
+					</thead>
+					<tbody id="js-variable__tbody">
+						<tr>
+							<td class="variable__td-index">1</td>
+							<td class="variable__td-content">追加ボタンを押すと行が増える。削除ボタンを押すと行が減る。</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</main>
+		
+		<div id="footer"></div>
+	</div>
+</body>
