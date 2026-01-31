@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>トップ</title>
+  <link rel="stylesheet" href="/style/index.css" />
+  <script defer src="/js/script.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div id="header"></div>
+		
+		<main class="main">
+
+			<form id="js-form" class="form">
+			    <h2>Bフォーム</h2>
+
+				<div class="form__group">
+					<div class="form__field">
+						<div class="form__label">名前</div>
+						<input class="form__control" type="text" id="name" name="name">
+					</div>
+					<div class="form__actions">
+						<input class="submit btn positive-btn" type="submit" value="送信する">
+						<div class="form__display">➡</div>
+					</div>
+				</div>
+				
+				<div class="form__group">
+					<div class="form__field">
+						<div class="form__label">性別</div>
+						<label>
+							<input type="radio" name="gender" value="male">男性
+						</label>
+						<label>
+							<input type="radio" name="gender" value="female">女性
+						</label>
+						<label>
+							<input type="radio" name="gender" value="others">その他
+						</label>              
+					</div>
+
+					<div class="form__actions">
+						<input class="submit btn positive-btn" type="submit" value="送信する">
+						<div class="form__display">➡</div>
+					</div>
+				</div>
+
+				<div class="form__group">					
+					<div class="form__field">
+						<div class="form__label">駅</div>
+						<select class="form__control" name="station">
+							<option value="1">新宿</option>
+							<option value="2">渋谷</option>
+							<option value="3">吉祥寺</option>
+						</select>
+					</div>
+					
+					<div class="form__actions">
+						<input class="submit btn positive-btn" type="submit" value="送信する">
+						<div class="form__display">➡</div>
+					</div>
+				</div>
+				
+				<div class="form__group">
+					<div class="form__field">
+						<div class="form__label">果物</div>
+						<label>
+							<input type="checkbox" name="fruits" value="lemon">レモン
+						</label>
+						<label>
+							<input type="checkbox" name="fruits" value="apple">りんご
+						</label>
+						<label>
+							<input type="checkbox" name="fruits" value="peach">もも
+						</label>              
+					</div>
+
+					<div class="form__actions">
+						<input class="submit btn positive-btn" type="submit" value="送信する">
+						<div class="form__display">➡</div>
+					</div>
+				</div>
+
+				<div class="form__group">
+					<div class="form__field" >
+						<div class="form__label" for="introduce">自己紹介</div>
+						<textarea class="form__control" id="introduce" rows="6" name="introduce"></textarea>
+					</div>
+					<div class="form__actions">						
+						<input class="submit btn positive-btn" type="submit" value="送信する">
+						<div class="form__display">➡</div>
+					</div>	
+				</div>
+			</form>
+		</main>
+		
+		<div id="footer"></div>
+	</div>
+</body>
