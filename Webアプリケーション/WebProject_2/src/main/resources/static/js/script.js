@@ -106,6 +106,10 @@ function createUser(){
 			// 入力欄クリア
 			document.getElementById("userNameInput").value = "";
 		})
+		.then(() => {
+			alert("登録成功");
+			location.href = "/";
+		})
 		.catch(error => {
 		  alert(error.message);
 		});
