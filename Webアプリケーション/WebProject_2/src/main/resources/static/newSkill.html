@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ユーザーリスト</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <script defer src="../js/script.js"></script>
+</head>
+<body>
+	<div class="layout--narrow">
+        <header id="header" class="header"></header>
+
+		<main class="main">
+
+			<!-- 入力エリア -->			
+			<section class="form">
+				<h2 class="form__title">スキル登録</h2>
+
+				<div id="errorMessageSkill" class="errorMessage"></div>
+
+				<!-- スキル -->
+				<div class="form__group">
+					<div class="form__field">
+						<!-- <label for="skillUserIdInput" class="form__label">ユーザーID</label> -->
+						<!-- <input type="number" id="skillUserIdInput" class="text-box text-box--md" placeholder="対象のユーザーID"> -->
+						 <label for="userName" class="form__label">ユーザー名</label>
+						 <div id="userName"></div>
+					</div>
+
+					<div class="form__field">
+						<label for="skillNameInput" class="form__label">スキル名</label>
+						<input type="text" id="skillNameInput" class="text-box text-box--md" placeholder="スキル名">
+					</div>
+
+					<div class="form__actions">
+						<button id="createSkillButton" class="btn btn--md btn-positive">スキル登録</button>
+					</div>
+				</div>
+		    </section>
+        </main>
+    </div>
+</body>

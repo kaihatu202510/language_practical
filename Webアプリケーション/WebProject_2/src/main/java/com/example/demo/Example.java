@@ -56,6 +56,35 @@ public class Example {
 		}
 	}
 	
+	// ユーザー単体取得
+	@GetMapping("/api/users/{id}")
+	public ResponseEntity<?> getUserById(@PathVariable("id") int id) throws SQLException {
+
+	    try (
+	        Connection connection = dataSource.getConnection();
+	        PreparedStatement statement =
+	            connection.prepareStatement("SELECT id, name FROM users WHERE id = ?");
+	    ) {
+
+	        statement.setInt(1, id);
+
+	        try (ResultSet resultSet = statement.executeQuery()) {
+
+	            if (!resultSet.next()) {
+	                return ResponseEntity.badRequest().body("存在しないIDです");
+	            }
+
+	            User user = new User(
+	                resultSet.getInt("id"),
+	                resultSet.getString("name")
+	            );
+
+	            return ResponseEntity.ok(user);
+	        }
+	    }
+	}
+
+	
 	// ユーザー作成
 	@PostMapping("/api/users")
 	public void createtUser(@RequestBody UserRequest request) throws SQLException {

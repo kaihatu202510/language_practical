@@ -9,107 +9,31 @@
 </head>
 <body>
 	<div class="layout">
-		<main class="main">
+		<header id="header" class="header"></header>
 
-			<!-- 入力エリア -->			
-			<section class="form">
-				
-				<!-- ユーザー -->
-				<h2 class="form__title">ユーザー登録</h2>
-
-				<div class="form__group">
-					<div class="form__field">
-						<label for="userNameInput" class="form__label">名前</label>
-						<input type="text" id="userNameInput" class="text-box text-box--md" placeholder="名前を入力">
-					</div>
-					<div class="form__actions">
-						<button id="createUserButton" class="btn btn--md btn-positive">ユーザー登録</button>
-					</div>
+		<main class="main">			
+			<section class="display__block">
+				<div class="display__inputs">			
+					<input type="text" id="userNameFilter" class="text-box" placeholder="正規表現で絞り込み">				
 				</div>
-				
-				<h2 class="form__title">スキル登録</h2>
 
-				<div id="errorMessageSkill" class="errorMessage"></div>
-
-				<!-- スキル -->
-				<div class="form__group">
-					<div class="form__field">
-						<label for="skillUserIdInput" class="form__label">ユーザーID</label>
-						<input type="number" id="skillUserIdInput" class="text-box text-box--md" placeholder="対象のユーザーID">
-					</div>
-
-					<div class="form__field">
-						<label for="skillNameInput" class="form__label">スキル名</label>
-						<input type="text" id="skillNameInput" class="text-box text-box--md" placeholder="スキル名">
-					</div>
-
-					<div class="form__actions">
-						<button id="createSkillButton" class="btn btn--md btn-positive">スキル登録</button>
-					</div>
+				<div class="display__actions">
+					<button id="getUsersButton" class="btn btn--sm btn-positive">ユーザー一覧取得</button>
 				</div>
-		    </section>
 
-			<!-- 表示エリア -->
-			<section class="section main__display">
-
-				<!-- ユーザー一覧 -->
-				<div class="display__block">
-					<div class="display__inputs">			
-						<input type="text" id="userNameFilter" class="text-box text-box--sm" placeholder="正規表現で絞り込み">				
-					</div>
-
-					<div class="display__actions">
-						<button id="getUsersButton" class="btn btn--sm btn-positive">ユーザー一覧</button>
-					</div>
-
-					<table class="display__list display__list--users">
-						<thead class="list-row--header">
-							<tr class="list-row">
-								<th>ID</th>
-								<th>ユーザー名</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody id="userTableBody">
-							<tr class="list-row"></tr>
-						</tbody>
-					</table>
-				</div>
-				
-				<!-- スキル一覧 -->
-				<div class="display__block">
-					<div class="display__inputs">
-						<input type="text" id="skillUserNameFilter" class="text-box text-box--sm" placeholder="ユーザー名で絞り込み">
-						<input type="text" id="skillNameFilter" class="text-box text-box--sm" placeholder="スキルで絞り込み">
-					</div>
-					<div class="display__actions">						
-						<button id="getSkillsButton" class="btn btn--sm btn-positive">スキル一覧</button>
-					</div>
-					<table class="display__list display__list--skills">
-						<thead class="list-row--header">
-							<tr class="list-row">
-								<th data-column="userName">
-									ユーザー名
-									<span class="sort-icons">
-									  <span class="sort-asc">▲</span>
-									  <span class="sort-desc">▼</span>
-									</span>
-								</th>
-								<th data-column="skill">
-									スキル
-									<span class="sort-icons">
-									  <span class="sort-asc">▲</span>
-									  <span class="sort-desc">▼</span>
-									</span>
-								</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody id="skillTableBody">
-							<tr class="list-row"></tr>
-						</tbody>
-					</table>
-				</div>
+				<table class="display__list display__list--users">
+					<thead class="list-row--header">
+						<tr class="list-row">
+							<th>ID</th>
+							<th>ユーザー名</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="userTableBody">
+						<tr class="list-row"></tr>
+					</tbody>
+				</table>
 			</section>
 		</main>
 	</div>
