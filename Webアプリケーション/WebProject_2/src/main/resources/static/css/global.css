@@ -1,0 +1,266 @@
+*{
+    box-sizing: border-box;
+}
+
+a{
+    display: block;
+}
+
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* 共通 */
+:root{
+    /* 色 */
+    --color-bg: #f5f5f5;
+    --color-base: #d5ebe5;
+    --color-assort: #5995ab;
+    --color-accent: #6bc4c7;
+    --color-text: #1f2530;
+
+    /* スペース */
+    --space1: 4px;
+    --space2: 8px;
+    --space3: 16px;
+    --space4: 24px;
+}
+
+.btn{
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.btn--sm{
+  padding: 8px;
+}
+
+.btn--md{
+  padding: 8px;
+  width: stretch;
+}
+
+.btn:hover{
+  cursor: pointer;
+}
+
+.btn-positive{
+  background-color: #6abd74;
+  color: white;
+}
+
+.btn-positive:hover{
+	cursor: pointer;
+	background-color: #52935a;
+}
+
+.btn-negative{
+  background-color: #e76969;
+  color: white;
+}
+
+.btn-negative:hover{
+  cursor: pointer;
+  background-color: #9e4747;
+}
+
+.errorMessage{
+  display: none;
+  margin-bottom: var(--space3);
+  padding: var(--space3);
+  background-color: #ffdfd8;
+  border: dashed 1px red;
+  border-radius: 8px;
+  color: red;
+}
+
+.errorMessage.is-visible {
+  display: block;
+}
+
+.text-box{
+  padding: 8px;
+  width: stretch;
+  border: solid 1px var(--color-assort);
+  border-radius: 8px;
+}
+
+.layout {
+  display: grid;
+  grid-template:
+    "header header header" 50px
+    "...... ...... ......" 10px
+    "...... index   ......" minmax(900px, 1fr)
+    "...... ...... ......" 10px
+    "footer footer footer" 50px
+    / auto minmax(400px, 800px) auto;
+}
+
+.layout--narrow{
+  display: grid;
+  grid-template:  
+    "header header header" 50px
+    "...... ...... ......" 50px
+    "...... index  ......" auto
+    "...... ...... ......" 10px
+    "footer footer footer" 50px
+    / auto 500px auto;;
+}
+
+#header{
+  grid-area: header;
+  position: sticky;
+  top: 0;
+}
+
+.header{
+  padding: var(--space4);
+  background-color: var(--color-bg);
+}
+
+.nav{
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.nav-link:hover {
+    opacity: 0.7;
+}
+
+body{
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+.main{
+  grid-area: index;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space3);
+  padding: var(--space4); 
+  background-color: var(--color-base);
+  border-radius: 8px;
+}
+
+.form{
+  padding: var(--space4) ;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.form__title{
+  text-align: center;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space4);
+  padding: var(--space4);
+  border-top: solid 1px var(--color-assort);
+  border-bottom: solid 1px var(--color-assort);
+  border-radius: 8px;
+}
+
+.form__field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.form__actions {
+  margin-top: var(--space2);
+}
+
+.main__display{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: var(--space4);
+  margin-top: var(--space4);
+}
+
+.display__block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #fff;
+  padding: var(--space3);
+  border-radius: 8px;
+}
+
+.display__inputs{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.display__actions{
+  display: flex;
+  justify-content: end;
+}
+
+.display__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space1);
+  margin-top: var(--space1);
+}
+
+.display__list--users .list-row {
+  grid-template-columns: 40px 1fr 100px 50px; /* ID + 名前 + スキル登録ボタン + 削除ボタン*/
+}
+
+.display__list--skills .list-row {
+  grid-template-columns: 1fr 1fr 50px; /* ユーザー名 + スキル名 */
+}
+
+.list-row {
+  display: grid;
+  align-items: center;
+  gap: var(--space1);
+  text-align: left;
+}
+
+.list-row--header {
+  padding: var(--space1) var(--space4);
+  font-weight: bold;
+  border-bottom: 1px solid var(--color-assort);
+}
+
+.list-row--body {
+  padding: 0 var(--space4);
+}
+
+.sort-icons {
+  margin-left: 6px;
+  font-size: 0.8em;
+}
+
+.sort-asc,
+.sort-desc {
+  cursor: pointer;
+  padding: 0 3px;
+  opacity: 0.3;
+}
+
+.sort-asc.active,
+.sort-desc.active {
+  opacity: 1;
+  font-weight: bold;
+}

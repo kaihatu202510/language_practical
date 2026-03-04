@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ユーザーリスト</title>
+  <link rel="stylesheet" th:href="@{/css/global.css}" />
+  <script defer th:src="@{/js/script.js}"></script>
+</head>
+<body>
+    <div class="layout">
+        <div th:replace="fragment/common :: header"></div>
+		
+		<!--スキル一覧-->
+        <div class="main">
+            <section class="display__block">
+                <div class="display__inputs">
+                    <input type="text" id="skillUserNameFilter" class="text-box text-box--sm" placeholder="ユーザー名で絞り込み">
+                    <input type="text" id="skillNameFilter" class="text-box text-box--sm" placeholder="スキルで絞り込み">
+                </div>
+                <div class="display__actions">						
+                    <button id="getSkillsButton" class="btn btn--sm btn-positive">スキル一覧検索</button>
+                </div>
+                <table class="display__list display__list--skills">
+                    <thead class="list-row--header">
+                        <tr class="list-row">
+                            <th data-column="userName">
+                                ユーザー名
+                                <span class="sort-icons">
+                                    <span class="sort-asc">▲</span>
+                                    <span class="sort-desc">▼</span>
+                                </span>
+                            </th>
+                            <th data-column="skill">
+                                スキル
+                                <span class="sort-icons">
+                                    <span class="sort-asc">▲</span>
+                                    <span class="sort-desc">▼</span>
+                                </span>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody th:fragment="skillListFragment" id="skillTableBody" class="list-row--body">
+						<!-- データがない場合 -->
+						<tr th:if="${#lists.isEmpty(skillList)}">
+						    <td colspan="3">データがありません</td>
+						</tr>
+						
+						<!-- データがある場合-->
+						<tr th:each="skill : ${skillList}" class="list-row">
+							<td th:text="${skill.userName}"></td>
+							<td th:text="${skill.skill}"></td>
+							<td>
+								<button
+									class="btn btn-negative btn--sm delete-skill-btn" 
+									th:data-id="${skill.id}">
+									削除
+								</button>
+							</td>
+						</tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</body>
