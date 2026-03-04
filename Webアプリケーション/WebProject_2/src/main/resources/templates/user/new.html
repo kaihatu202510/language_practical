@@ -4,12 +4,12 @@
   <meta charset="UTF-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ユーザーリスト</title>
-  <link rel="stylesheet" href="../css/global.css" />
-  <script defer src="../js/script.js"></script>
+  <link rel="stylesheet" th:href="@{/css/global.css}" />
+  <script defer th:src="@{/js/script.js}"></script>
 </head>
 <body>
 	<div class="layout--narrow">
-        <header id="header" class="header"></header>
+        <div th:replace="fragment/common :: header"></div>
 
 		<main class="main">
 			<section class="form">

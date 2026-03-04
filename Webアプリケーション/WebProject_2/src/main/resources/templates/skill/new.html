@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ユーザーリスト</title>
-  <link rel="stylesheet" href="../css/global.css" />
-  <script defer src="../js/script.js"></script>
+  <link rel="stylesheet" th:href="@{/css/global.css}" />
+  <script defer th:src="@{/js/script.js}"></script>
 </head>
 <body>
 	<div class="layout--narrow">
-        <header id="header" class="header"></header>
+        <div th:replace="fragment/common :: header"></div>
 
 		<main class="main">
 
@@ -22,10 +22,8 @@
 				<!-- スキル -->
 				<div class="form__group">
 					<div class="form__field">
-						<!-- <label for="skillUserIdInput" class="form__label">ユーザーID</label> -->
-						<!-- <input type="number" id="skillUserIdInput" class="text-box text-box--md" placeholder="対象のユーザーID"> -->
 						 <label for="userName" class="form__label">ユーザー名</label>
-						 <div id="userName"></div>
+						 <div id="userName" th:text="${user.name}"></div>
 					</div>
 
 					<div class="form__field">
@@ -34,7 +32,7 @@
 					</div>
 
 					<div class="form__actions">
-						<button id="createSkillButton" class="btn btn--md btn-positive">スキル登録</button>
+						<button th:data-user-id="${user.id}" id="createSkillButton" class="btn btn--md btn-positive">スキル登録</button>
 					</div>
 				</div>
 		    </section>
