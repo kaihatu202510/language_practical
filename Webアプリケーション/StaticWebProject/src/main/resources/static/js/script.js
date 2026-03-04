@@ -1,15 +1,12 @@
-// 初期化sts
-document.addEventListener("DOMContentLoaded", () => {
-	initCommon();
-	initForm();
-	initTable();
-});
-
+// 初期化
+initCommon();
+initForm();
+initTable();
 
 // ヘッダー及びフッター
 function initCommon(){
-	loadHtml("header", "./commons/header.html");
-	loadHtml("footer", "./commons/footer.html");
+	loadHtml("header", "/commons/header.html");
+	loadHtml("footer", "/commons/footer.html");
 }
 
 function loadHtml(id, path) {
