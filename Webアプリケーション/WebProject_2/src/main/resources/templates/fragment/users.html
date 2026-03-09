@@ -1,0 +1,23 @@
+<tbody id="userTableBody"
+       th:fragment="userListFragment"
+       class="list-row--body">
+    <tr th:each="user : ${userList}" class="list-row">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+		<td>
+			<button 
+				class="btn btn-positive btn--sm add-skill-btn" 
+				data-id="${user.id}">
+				スキル登録
+			</button>
+		</td>
+		<td>
+			<button 
+				class="btn btn-negative btn--sm delete-user-btn" 
+				data-id="${user.id}">
+				削除
+			</button>
+		</td>
+    </tr>
+	
+</tbody>

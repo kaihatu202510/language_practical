@@ -32,6 +32,7 @@ li {
 .btn{
   border: none;
   border-radius: 8px;
+  text-decoration: none;
 }
 
 .btn--sm{
@@ -237,8 +238,13 @@ body{
 }
 
 .list-row--header {
+  padding: var(--space1) var(--space4);
   font-weight: bold;
   border-bottom: 1px solid var(--color-assort);
+}
+
+.list-row--body {
+  padding: 0 var(--space4);
 }
 
 .sort-icons {

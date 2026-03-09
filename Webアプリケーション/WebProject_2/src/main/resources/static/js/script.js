@@ -2,17 +2,14 @@
 // 共通
 // =======================
 document.addEventListener("DOMContentLoaded", () => {
-	initCommon();
 	
 	getUsers();
 	createUser();
 	deleteUser();
 	
-	initNewSkillPage()
 	getSkills();
 	createSkill();
 	deleteSkill();
-	addSkillButtonHandler()
 });
 
 // ヘッダー及びフッター
@@ -35,45 +32,10 @@ function loadHtml(id, path) {
 // ユーザー一覧取得
 function getUsers(){
 	const btn = document.getElementById("getUsersButton");
-	
 	if(!btn) return;
 	
 	btn.addEventListener("click", () => {
-		fetch("http://localhost:8080/api/users")
-		.then(response => response.json())
-		.then(users => {
-			const pattern = document.getElementById("userNameFilter").value;
-			const tbody = document.getElementById("userTableBody");
-			tbody.innerHTML = "";
-			
-			const filteredUsers = filterUsersByName(users, pattern);
-			
-			filteredUsers.forEach(user => {
-				const tr = document.createElement("tr");
-				tr.className = "list-row";
-				
-				tr.innerHTML = `
-					<td>${user.id}</td>
-					<td>${user.name}</td>
-					<td>
-						<button 
-							class="btn btn-positive btn--sm add-skill-btn" 
-							data-id="${user.id}">
-							スキル登録
-						</button>
-					</td>
-					<td>
-						<button 
-							class="btn btn-negative btn--sm delete-user-btn" 
-							data-id="${user.id}">
-							削除
-						</button>
-					</td>
-				`;	// 引数はDTOクラスのフィールド名
-				tbody.appendChild(tr);
-			})
-	
-		})
+		filterUser();
 	});
 }
 
@@ -103,10 +65,6 @@ function createUser(){
 		  }
 		})
 		.then(() => {
-			// 入力欄クリア
-			document.getElementById("userNameInput").value = "";
-		})
-		.then(() => {
 			alert("登録成功");
 			location.href = "/";
 		})
@@ -118,57 +76,71 @@ function createUser(){
 
 // ユーザー一覧の行を削除
 function deleteUser(){
-	const table = document.getElementById("userTableBody");
-	
-	if(!table) return
-	
-	table.addEventListener("click", (e) => {
-	    if (!e.target.classList.contains("delete-user-btn")) return;
-	
-	    const id = e.target.dataset.id;
-	
-	    fetch(`http://localhost:8080/api/users/${id}`, {
-	        method: "DELETE"
-	    })
-	    .then(response => {
-	        if (!response.ok) {
-	            return response.text().then(msg => {
-	                throw new Error(msg);
-	            });
+	const tbody = document.getElementById("userTableBody");
+
+	if(!tbody) return;
+
+	tbody.addEventListener("click", (e) => {
+		if (!e.target.classList.contains("delete-user-btn")) return;
+
+        const button = e.target;
+        const id = button.dataset.id;
+
+        fetch("http://localhost:8080/api/users/" + id, {
+            method: "DELETE"
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(msg => {
+                    throw new Error(msg);
+                });
+            }
+        })
+        .then(() => {
+			const row = e.target.closest("tr");
+			row.remove();
+			
+			// 削除後にデータが0ならデータがない旨を表示。
+			const remainingRows = tbody.querySelectorAll("tr");
+			if (remainingRows.length === 0) {
+	            const emptyRow = document.createElement("tr");
+
+	            emptyRow.innerHTML = `
+	                <td colspan="3">データがありません</td>
+	            `;
+
+	            tbody.appendChild(emptyRow);
 	        }
-	    })
-	    .then(() => {
-	        // 再取得
-	        document.getElementById("getUsersButton").click();
-	    })
-	    .catch(err => alert(err.message));
-	});
+        })
+        .catch(err => alert(err.message));
+    });
 }
 
-// スキル追加画面へ遷移
-function addSkillButtonHandler(){
-	const table = document.getElementById("userTableBody");
-	
-	if(!table) return
-	
-	table.addEventListener("click", (e) => {
-	    if (!e.target.classList.contains("add-skill-btn")) return;
-	
-	    const id = e.target.dataset.id;
-	
-		location.href = `newSkill.html?userId=${id}`;
-	});
-}
 
-// ユーザー名でユーザー一覧を絞り込み
-function filterUsersByName(users, pattern){
-	try{
-		const regex = new RegExp(pattern);			
-		return users.filter(user => regex.test(user.name));
-	}catch{
-		// 無効な正規表現の場合、全てを返す
-		return users;
-	}
+// user検索
+function filterUser() {
+	const keyword = document.getElementById("userNameFilter").value;
+
+    let regex;
+
+    try {
+        regex = new RegExp(keyword);
+    } catch (e) {
+        // 正規表現が壊れている場合は何もしない
+        return;
+    }
+
+    const rows = document.querySelectorAll("#userTableBody tr.list-row");
+
+    rows.forEach(row => {
+        const text = row.children[1].textContent;
+
+        if (regex.test(text)) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    });
 }
 
 
@@ -182,121 +154,65 @@ let currentSortOrder = null;
 let selectedUserId = null;
 
 
-
-// スキル登録画面
-function initNewSkillPage() {
-	const userNameDiv = document.getElementById("userName");
-	if (!userNameDiv) return;
-
-	const params = new URLSearchParams(window.location.search);
-	selectedUserId = params.get("userId");
-
-	if (!selectedUserId) {
-		userNameDiv.textContent = "ユーザーが指定されていません";
-		return;
-	}
-
-	loadUser(selectedUserId);
-}
-
-
-function loadUser(userId) {
-	fetch(`http://localhost:8080/api/users/${userId}`)
-		.then(response => response.json())
-		.then(user => {
-			document.getElementById("userName").textContent = user.name;
-		})
-		.catch(err => {
-			document.getElementById("userName").textContent = "取得失敗";
-		});
-}
-
-
 // スキル一覧取得
-function getSkills(){
-	const btn = document.getElementById("getSkillsButton");
-	
-	if(!btn) return;
-	
-	btn.addEventListener("click", () => {
-		fetch("http://localhost:8080/api/skills")
-		.then(response => response.json())
-		.then(data => {		
-			const skillNameFilter = document.getElementById("skillNameFilter").value;
-			const userNameFilter = document.getElementById("skillUserNameFilter").value;
-	
-			skills = filterSkillsBySkillNameAndUserName(data, skillNameFilter, userNameFilter);
-			currentSortColumn = null;
-			currentSortOrder = null;
-			
-			inactiveSortIcons()
-			renderTable();
-		});
-	});
+function getSkills() {
+    const btn = document.getElementById("getSkillsButton");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+        filterSkills();
+
+        if (currentSortColumn && currentSortOrder) {
+            sortTable(currentSortColumn, currentSortOrder);
+        }
+    });
 }
 
-// テーブル作成
-function renderTable() {
+// スキル一覧ソート
+function sortTable(columnKey, order) {
+
     const tbody = document.getElementById("skillTableBody");
-    tbody.innerHTML = "";
+    const rows = Array.from(tbody.querySelectorAll("tr"));
 
-    let displaySkills = [...skills];
-
-    if (currentSortColumn && currentSortOrder) {
-        displaySkills.sort((a, b) => {
-            const compare = a[currentSortColumn]
-                .localeCompare(b[currentSortColumn], "ja");
-
-            return currentSortOrder === "asc"
-                ? compare
-                : -compare;
-        });
+    // 列番号を決定
+    let columnIndex;
+    if (columnKey === "userName") {
+        columnIndex = 0;
+    } else if (columnKey === "skill") {
+        columnIndex = 1;
     }
 
-    displaySkills.forEach(skill => {
-		const tr = document.createElement("tr");
-		tr.className = "list-row";				
-		tr.innerHTML = `
-			<td>${skill.userName}</td>
-			<td>${skill.skill}</td>
-			<td>
-				<button 
-					class="btn btn-negative btn--sm delete-skill-btn" 
-					data-id="${skill.id}">
-					削除
-				</button>
-			</td>
-		`;
-		tbody.appendChild(tr);
+    rows.sort((a, b) => {
+        const aText = a.children[columnIndex].textContent.trim();
+        const bText = b.children[columnIndex].textContent.trim();
+
+        return order === "asc"
+            ? aText.localeCompare(bText, "ja")
+            : bText.localeCompare(aText, "ja");
     });
+
+    // 並び替えた順に再追加
+    rows.forEach(row => tbody.appendChild(row));
 }
 
 // ソートアイコンクリック処理
-document.querySelectorAll(".sort-asc").forEach(icon => {
-    icon.addEventListener("click", function (e) {
+document.addEventListener("click", function (e) {
 
-        const th = this.closest("th");
-        currentSortColumn = th.dataset.column;
-        currentSortOrder = "asc";
+    if (e.target.classList.contains("sort-asc") ||
+        e.target.classList.contains("sort-desc")) {
 
-        updateSortIcons(th, "asc");
-        renderTable();
-    });
+        const th = e.target.closest("th");
+        const sortColumn = th.dataset.column;
+        const sortOrder =
+            e.target.classList.contains("sort-asc") ? "asc" : "desc";
+			
+		currentSortColumn = sortColumn;
+		currentSortOrder = sortOrder;
+		
+        updateSortIcons(th, sortOrder);
+        sortTable(sortColumn, sortOrder);
+    }
 });
-
-document.querySelectorAll(".sort-desc").forEach(icon => {
-    icon.addEventListener("click", function (e) {
-        e.stopPropagation();
-
-        const th = this.closest("th");
-        currentSortColumn = th.dataset.column;
-        currentSortOrder = "desc";
-
-        updateSortIcons(th, "desc");
-        renderTable();
-    });
-});
-
 
 // アイコン状態更新
 function updateSortIcons(activeTh, order) {
@@ -327,6 +243,7 @@ function createSkill(){
 	btn.addEventListener("click", () => {
 
 		const skill = document.getElementById("skillNameInput").value;
+		const userId = Number(btn.dataset.userId);
 		const errorMsgId = "errorMessageSkill";
 
 		hideError(errorMsgId);
@@ -337,7 +254,7 @@ function createSkill(){
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				userId: Number(selectedUserId),
+				userId: userId,
 				skill: skill
 			})
 		})
@@ -349,9 +266,8 @@ function createSkill(){
 		    }
 		})
 		.then(() => {
-			document.getElementById("skillNameInput").value = "";
 			alert("登録成功");
-			location.href = "skills.html";
+			location.href = "/skills";
 		})
 		.catch(error => {
 			showError(error.message, errorMsgId);
@@ -363,11 +279,11 @@ function createSkill(){
 
 // スキル一覧の行を削除
 function deleteSkill(){
-	const table = document.getElementById("skillTableBody");
+	const tbody = document.getElementById("skillTableBody");
 	
-	if(!table) return;
+	if(!tbody) return;
 	
-	table.addEventListener("click", (e) => {
+	tbody.addEventListener("click", (e) => {
 	    if (!e.target.classList.contains("delete-skill-btn")) return;
 	
 	    const id = e.target.dataset.id;
@@ -385,8 +301,20 @@ function deleteSkill(){
 	        }
 	    })
 	    .then(() => {
-	        // 再取得
-	        document.getElementById("getSkillsButton").click();
+			const row = e.target.closest("tr");
+			row.remove();
+			
+			// 削除後にデータが0ならデータがない旨を表示。
+			const remainingRows = tbody.querySelectorAll("tr");
+			if (remainingRows.length === 0) {
+	            const emptyRow = document.createElement("tr");
+
+	            emptyRow.innerHTML = `
+	                <td colspan="3">データがありません</td>
+	            `;
+
+	            tbody.appendChild(emptyRow);
+	        }
 	    })
 	    .catch(err => alert(err.message));
 	});
@@ -405,19 +333,37 @@ function hideError(id){
 	elem.classList.remove("is-visible");
 }
 
-//ユーザー名およびスキル名でスキル一覧を絞り込み
-function filterSkillsBySkillNameAndUserName(skills, skillName, userName){
-	try{
-		const skillRegex = new RegExp(skillName);
-		const userNameRegex = new RegExp(userName);
-		return skills.filter(skill => 
-			skillRegex.test(skill.skill) &&
-			userNameRegex.test(skill.userName)
-		);
-	}catch{
-		// 無効な正規表現の場合、全てを返す
-		return skills;
-	}
+// ユーザー名およびスキル名でスキル一覧を絞り込み
+function filterSkills() {
+    const userInput = document.getElementById("skillUserNameFilter");
+    const skillInput = document.getElementById("skillNameFilter");
+
+    if (!userInput || !skillInput) return;
+
+    const userKeyword = userInput.value;
+    const skillKeyword = skillInput.value;
+
+    let userRegex, skillRegex;
+
+    try {
+        userRegex = new RegExp(userKeyword);
+        skillRegex = new RegExp(skillKeyword);
+    } catch (e) {
+        return;
+    }
+
+    const rows = document.querySelectorAll("#skillTableBody tr");
+
+    rows.forEach(row => {
+        const userName = row.children[0].textContent;
+        const skill = row.children[1].textContent;
+
+        const match =
+            userRegex.test(userName) &&
+            skillRegex.test(skill);
+
+        row.style.display = match ? "" : "none";
+    });
 }
 
 
