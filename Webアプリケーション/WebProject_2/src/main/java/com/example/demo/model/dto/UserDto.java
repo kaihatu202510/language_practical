@@ -1,10 +1,10 @@
-package com.example.demo.dto;
+package com.example.demo.model.dto;
 
-public class UserRequest {
+public class UserDto {
 	private Integer id;
 	private String name;
 	
-    public UserRequest() {}
+    public UserDto() {}
     
 	public Integer getid() {
 		return id;
