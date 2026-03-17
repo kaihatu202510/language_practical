@@ -44,24 +44,6 @@ public class SkillDao {
         }
     }
 
-    // ユーザー存在確認
-    public boolean existsUser(int userId) throws SQLException {
-
-        String sql = "SELECT id FROM users WHERE id = ?";
-
-        try (
-            Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)
-        ) {
-
-            statement.setInt(1, userId);
-
-            ResultSet rs = statement.executeQuery();
-
-            return rs.next();
-        }
-    }
-
     // スキル作成
     public void insertSkill(int userId, String skill) throws SQLException {
 

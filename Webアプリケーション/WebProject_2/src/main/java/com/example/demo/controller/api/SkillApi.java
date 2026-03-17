@@ -22,9 +22,15 @@ public class SkillApi {
 	// スキル作成
 	@PostMapping("/api/skills")
 	public ResponseEntity<?> createSkill(@RequestBody SkillDto request) throws SQLException {
-	    skillService.createSkill(request);
-	    
-		return ResponseEntity.ok().build();
+	    try {
+	        skillService.createSkill(request);
+	        return ResponseEntity.ok().build();
+
+	    } catch (IllegalArgumentException e) {
+	        return ResponseEntity
+	                .badRequest()
+	                .body(e.getMessage());
+	    }
 	}
 	
 	// スキル削除

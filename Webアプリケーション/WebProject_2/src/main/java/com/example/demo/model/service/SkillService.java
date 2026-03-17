@@ -7,14 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dao.SkillDao;
+import com.example.demo.model.dao.UserDao;
 import com.example.demo.model.dto.SkillDto;
 import com.example.demo.model.dto.SkillView;
 
 @Service
 public class SkillService {
+	
+    private final SkillDao skillDao;
+    private final UserService userService;
 
     @Autowired
-    private SkillDao skillDao;
+    public SkillService(SkillDao skillDao, UserService userService) {
+        this.skillDao = skillDao;
+        this.userService = userService;
+    }
 
     // 全行
     public List<SkillView> getSkills() throws SQLException {
@@ -31,7 +38,7 @@ public class SkillService {
             throw new IllegalArgumentException("スキル名を入力してください");
         }
 
-        if (!skillDao.existsUser(userId)) {
+        if (userService.getUser(userId) == null) {
             throw new IllegalArgumentException("存在しないユーザーです");
         }
 
@@ -43,8 +50,5 @@ public class SkillService {
 
         int rows = skillDao.deleteSkill(id);
 
-        if (rows == 0) {
-            throw new IllegalArgumentException("存在しないIDです");
-        }
     }
 }
