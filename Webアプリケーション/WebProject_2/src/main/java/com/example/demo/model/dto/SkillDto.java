@@ -1,10 +1,10 @@
-package com.example.demo.dto;
+package com.example.demo.model.dto;
 
-public class SkillRequest {
+public class SkillDto {
 	private Integer userId;
 	private String skill;
 	
-	public SkillRequest() {}
+	public SkillDto() {}
 	
 	public Integer getUserId() {
 		return userId;
