@@ -36,6 +36,8 @@ li {
 }
 
 .btn--sm{
+  font-size:14px;
+  text-align: center;
   padding: 8px;
 }
 
@@ -135,8 +137,14 @@ li {
     transition: opacity 0.2s ease;
 }
 
+.nav-btn{
+	border: none;
+	background: none;
+}
+
 .nav-link:hover {
     opacity: 0.7;
+	cursor: pointer;
 }
 
 body{
@@ -227,7 +235,7 @@ body{
 }
 
 .display__list--skills .list-row {
-  grid-template-columns: 1fr 1fr 50px; /* ユーザー名 + スキル名 */
+  grid-template-columns: 1fr 1fr 50px 50px; /* ユーザー名 + スキル名 + 更新 + 削除 */
 }
 
 .list-row {

@@ -17,24 +17,20 @@
 
 			<!-- 入力エリア -->			
 			<section class="form">
-				<h2 class="form__title">スキル登録</h2>
+				<h2 class="form__title">スキル編集</h2>
 
 				<div id="errorMessageSkill" class="errorMessage"></div>
 
 				<!-- スキル -->
 				<div class="form__group">
-					<div class="form__field">
-						 <label for="userName" class="form__label">ユーザー名</label>
-						 <div id="userName" th:text="${user.name}"></div>
-					</div>
 
 					<div class="form__field">
 						<label for="skillNameInput" class="form__label">スキル名</label>
-						<input type="text" id="skillNameInput" class="text-box text-box--md" placeholder="スキル名" autofocus>
+						<input th:value="${skill.name}" type="text" id="skillNameInput" class="text-box text-box--md" placeholder="スキル名" autofocus>
 					</div>
 
 					<div class="form__actions">
-						<button th:data-user-id="${user.id}" id="createSkillButton" class="btn btn--md btn-positive">スキル登録</button>
+						<button id="updateSkillButton" th:data-skill-id="${skill.id}" class="btn btn--md btn-positive">更新</button>
 					</div>
 				</div>
 		    </section>

@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="_csrf" th:content="${_csrf.token}">
+  <meta name="_csrf_header" th:content="${_csrf.headerName}">
   <title>ユーザーリスト</title>
   <link rel="stylesheet" th:href="@{/css/global.css}" />
   <script defer th:src="@{/js/script.js}"></script>
@@ -17,9 +19,23 @@
 
 				<div class="form__group">
 					<div class="form__field">
-						<label for="userNameInput" class="form__label">名前</label>
+						<label for="userNameInput" class="form__label">名前:</label>
 						<input type="text" id="userNameInput" class="text-box text-box--md" placeholder="名前を入力" autofocus>
 					</div>
+					
+					<div class="form__field">
+						<label for="password">パスワード:</label>
+						<input type="password" id="userPasswordInput" name="password" class="text-box text-box--md" required/>
+					</div>
+					
+					<div class="form__field">
+						<label for="userRoleInput" class="form__label">権限:</label>
+						<select name="role" id="userRoleInput" class="text-box text-box--md" placeholder="権限を入力">
+							<option value="2">一般ユーザー</option>
+							<option value="1">管理者</option>
+						</select>
+					</div>
+					
 					<div class="form__actions">
 						<button id="createUserButton" class="btn btn--md btn-positive">ユーザー登録</button>
 					</div>

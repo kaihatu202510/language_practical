@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +32,24 @@ public class SkillApi {
 	        return ResponseEntity
 	                .badRequest()
 	                .body(e.getMessage());
+	    }
+	}
+	
+	// スキル更新
+	@PostMapping("/api/skills/edit/{id}")
+	public ResponseEntity<?> editSkill(@RequestBody SkillDto request) throws SQLException {
+	    try {
+	        skillService.updateSkill(request);
+	        return ResponseEntity.ok().build();
+
+	    } catch (IllegalArgumentException e) {
+	        return ResponseEntity
+	                .badRequest()
+	                .body(e.getMessage());
+	    } catch (AccessDeniedException e) {
+	    	return ResponseEntity
+	    			.badRequest()
+	    			.body(e.getMessage());
 	    }
 	}
 	

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ユーザーリスト</title>
+  <link rel="stylesheet" th:href="@{/css/global.css}" />
+  <script defer th:src="@{/js/script.js}"></script>
+</head>
+<body>
+	<div class="layout--narrow">
+        <div th:replace="fragment/common :: header"></div>
+
+		<main class="main">
+			<h1>トップ画面</h1>
+			<!--ログイン前-->
+			<div sec:authorize="isAnonymous()">
+				<button  class="btn btn--md">
+					<a th:href="@{/login}" class="nav-link">
+						ログイン
+					</a>
+				</button>
+			</div>
+        </main>
+    </div>
+</body>
