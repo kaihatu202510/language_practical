@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	createSkill();
 	updateSkill();
 	deleteSkill();
+	updateUser();
 });
 
 // ヘッダー及びフッター
@@ -82,6 +83,49 @@ function createUser(){
 	});
 }
 
+// ユーザー更新
+function updateUser(){
+		const btn = document.getElementById("updateUserButton");
+		
+		if(!btn) return;
+		
+		const token = document.querySelector('meta[name="_csrf"]').content;
+		const header = document.querySelector('meta[name="_csrf_header"]').content;
+			
+		btn.addEventListener("click", () => {
+			console.log("hello")
+
+			const name = document.getElementById("userNameInput").value;
+			const role = document.getElementById("userRoleInput").value;
+			const id = Number(btn.dataset.userId);
+
+			fetch(`http://localhost:8080/api/user/update/${id}`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					[header]:token
+				},
+				body: JSON.stringify({
+					id: id,
+					name: name,
+					role: role
+				})
+			})
+			.then(response => {
+			    if (!response.ok) {
+			        return response.text().then(message => {
+			            throw new Error(message);
+			        });
+			    }
+			})
+			.then(() => {
+				alert("更新成功");
+				location.href = "/users";
+			})
+			.catch(err => alert(err.message));
+		});
+	}
+
 // ユーザー一覧の行を削除
 function deleteUser(){
 	const tbody = document.getElementById("userTableBody");
@@ -92,13 +136,13 @@ function deleteUser(){
 	const header = document.querySelector('meta[name="_csrf_header"]').content;
 	
 	tbody.addEventListener("click", (e) => {
-		if (!e.target.classList.contains("delete-user-btn")) return;
+		if (!e.target.classList.contains("updatete-user-btn")) return;
 
         const button = e.target;
         const id = button.dataset.id;
 
-        fetch("http://localhost:8080/api/users/" + id, {
-            method: "DELETE",
+        fetch("http://localhost:8080/api/user/update/" + id, {
+            method: "UPDATE",
 			headers:{
 				[header]:token
 			}

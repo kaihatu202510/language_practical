@@ -50,19 +50,27 @@
 							<td th:text="${user.name}"></td>
 							<td>
 								<a 
-									th:if="${loginUser.role == 1 or loginUser.id == user.id}"
-									th:href="@{users/{id}/skills/new(id=${user.id})}"
+									th:if="${loginUser.role == 1}"
+									th:href="@{admin/user/edit/{id}(id=${user.id})}"
 									class="btn btn-positive btn--sm add-skill-btn">
-									スキル登録
+									編集
 								</a>
 							</td>
 							<td>
-								<button 
+								<button
 									class="btn btn-negative btn--sm delete-user-btn" 
 									th:data-id="${user.id}"
 									sec:authorize="hasRole('ADMIN')">									
 									削除
 								</button>
+							</td>
+							<td>
+								<a 
+									th:if="${loginUser.role == 1 or loginUser.id == user.id}"
+									th:href="@{users/{id}/skills/new(id=${user.id})}"
+									class="btn btn-primary btn--sm add-skill-btn">
+									スキル登録
+								</a>
 							</td>
 						</tr>
 					</tbody>

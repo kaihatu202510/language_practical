@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,10 +38,26 @@ public class UserApi {
 		
 		return ResponseEntity.ok().build();
 	}
+	
+	// ユーザー更新
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/api/user/update/{id}")
+	public ResponseEntity<?> updateUser(@RequestBody UserDto user) throws SQLException {
+    	
+	    try {
+	    	userService.updateUser(user);
+	        return ResponseEntity.ok().build();
 
+	    } catch (IllegalArgumentException e) {
+	        return ResponseEntity
+	                .badRequest()
+	                .body(e.getMessage());
+	    }
+	}
+	
 	// ユーザー削除
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping("/api/users/{id}")
+	@DeleteMapping("/api/user/delete/{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable("id") int id) throws SQLException {
     	userService.deleteUser(id);
     	

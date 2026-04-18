@@ -8,7 +8,7 @@ public class UserDto {
 	
     public UserDto() {}
     
-	public Integer getid() {
+	public Integer getId() {
 		return id;
 	}
 	

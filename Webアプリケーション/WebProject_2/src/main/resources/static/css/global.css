@@ -70,6 +70,16 @@ li {
   background-color: #9e4747;
 }
 
+.btn-primary{
+  background-color: #00AAFF;
+  color: white;
+}
+
+.btn-primary:hover{
+	cursor: pointer;
+	background-color: #008ED6;
+}
+
 .errorMessage{
   display: none;
   margin-bottom: var(--space3);
@@ -231,11 +241,11 @@ body{
 }
 
 .display__list--users .list-row {
-  grid-template-columns: 40px 1fr 100px 50px; /* ID + 名前 + スキル登録ボタン + 削除ボタン*/
+  grid-template-columns: 40px 1fr 50px 50px 100px; /* ID + 名前 + 編集 + 削除ボタン + スキル登録ボタン　*/
 }
 
 .display__list--skills .list-row {
-  grid-template-columns: 1fr 1fr 50px 50px; /* ユーザー名 + スキル名 + 更新 + 削除 */
+  grid-template-columns: 1fr 1fr 50px 50px; /* ユーザー名 + スキル名 + 編集 + 削除 */
 }
 
 .list-row {

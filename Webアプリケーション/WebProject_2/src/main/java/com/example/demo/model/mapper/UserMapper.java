@@ -12,5 +12,6 @@ public interface UserMapper {
 	User findUserById(int id);
 	List<User> getUsers(String keyword);
 	void insertUser(User user);
+	int updateUser(User user);
 	int deleteUser(int id);
 }

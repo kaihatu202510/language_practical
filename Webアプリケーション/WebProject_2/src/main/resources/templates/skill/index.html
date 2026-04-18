@@ -63,9 +63,9 @@
 							</td>
 							<td>
 								<a
+									th:if="${loginUser.role == 1 or loginUser.id == skill.userId}"
 									class="btn btn-negative btn--sm delete-skill-btn" 
-									th:data-id="${skill.id}"
-									sec:authorize="hasRole('ADMIN')">
+									th:data-id="${skill.id}">
 									削除
 								</a>
 							</td>

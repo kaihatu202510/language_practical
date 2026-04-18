@@ -31,6 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(#{name}, #{password}, #{enabled}, #{role})
 	</insert>
 	
+	<!--ユーザー更新-->
+	<update id="updateUser">
+	    UPDATE users
+	    SET name = #{name}, role = #{role}
+	    WHERE id = #{id}
+	</update>
+	
 	<!--ユーザー論理削除-->
 	<update id="deleteUser">
 	    UPDATE users

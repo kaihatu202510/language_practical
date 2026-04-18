@@ -46,6 +46,21 @@ public class UserService {
     	
         userMapper.insertUser(user);
     }
+    
+    // 更新
+    public void updateUser(UserDto dto) throws SQLException {
+        User user = userMapper.findUserById(dto.getId());
+        String name = dto.getName();
+        
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("名前を入力してください");
+        }
+        
+        user.setName(name);
+        user.setRole(dto.getRole());
+        
+        userMapper.updateUser(user);
+    }
 
     // 削除
     public void deleteUser(int id) throws SQLException {
