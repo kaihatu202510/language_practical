@@ -8,21 +8,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.example.demo.model.dto.SkillView;
+import com.example.demo.model.entity.Skill;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.service.SkillService;
 import com.example.demo.model.service.UserService;
+import com.example.demo.model.service.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 
 @Controller
 public class SkillController {
-	@Autowired
+
 	private SkillService skillService;
-	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	public SkillController(SkillService skillService, UserService userService, UserServiceImpl userServiceImpl) {
+		this.skillService = skillService;
+		this.userService = userService;	
+	}
+	
 		
 	//skill一覧取得
 	@GetMapping("/skills")
@@ -32,7 +42,9 @@ public class SkillController {
 	) throws SQLException {
 		
 		List<SkillView> skills = skillService.getSkills();
+		User loginUser = userService.getLoginUser();
 		
+		model.addAttribute("loginUser", loginUser);		
         model.addAttribute("skillList", skills);        
 
         if ("XMLHttpRequest".equals(requestedWith)) {
@@ -47,10 +59,31 @@ public class SkillController {
 	@GetMapping("/users/{id}/skills/new")
 	public String newSkill(@PathVariable("id") int id, Model model) throws SQLException {		
 		User user = userService.getUser(id);
+		User loginUser = userService.getLoginUser();
 		
-		model.addAttribute("user", user);
+		if(loginUser.getRole() == 1 || (user != null && user.getId() == loginUser.getId())) {
+			model.addAttribute("user", user);			
+			return "skill/new";
+		} else {
+			return "error/accessDenied";
+		}
 		
-		return "skill/new";
+	}
+	
+	//スキル編集画面
+	@GetMapping("/skill/edit/{id}")
+	public String editSkill(@PathVariable("id") int id, Model model) throws SQLException {		
+		Skill skill = skillService.getSkill(id);
+		User loginUser = userService.getLoginUser();
+		Integer userId = skill.getUserId();
+		
+		if(loginUser.getRole() == 1 || (userId != null && userId == loginUser.getId())) {
+			model.addAttribute("skill", skill);		
+			return "skill/edit";
+		} else {
+			return "error/accessDenied";
+		}
+		
 	}
 	
 	

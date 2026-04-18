@@ -15,29 +15,24 @@
 
 		<main class="main">
 			<section class="form">
-				<h2 class="form__title">ユーザー登録</h2>
+				<h2 class="form__title">ユーザー編集</h2>
 
 				<div class="form__group">
 					<div class="form__field">
 						<label for="userNameInput" class="form__label">名前:</label>
-						<input type="text" id="userNameInput" class="text-box text-box--md" placeholder="名前を入力" autofocus>
+						<input th:value="${user.name}" type="text" id="userNameInput" class="text-box text-box--md" placeholder="名前を入力" autofocus>
 					</div>
-					
-					<div class="form__field">
-						<label for="password">パスワード:</label>
-						<input type="password" id="userPasswordInput" name="password" class="text-box text-box--md" required/>
-					</div>
-					
+										
 					<div class="form__field">
 						<label for="userRoleInput" class="form__label">権限:</label>
-						<select name="role" id="userRoleInput" class="text-box text-box--md" placeholder="権限を入力">
+						<select th:field="*{user.role}" name="role" id="userRoleInput" class="text-box text-box--md" placeholder="権限を入力">
 							<option value="2">一般ユーザー</option>
 							<option value="1">管理者</option>
 						</select>
 					</div>
 					
 					<div class="form__actions">
-						<button id="createUserButton" class="btn btn--md btn-positive">ユーザー登録</button>
+						<button id="updateUserButton"  th:data-user-id="${user.id}" class="btn btn--md btn-positive">更新</button>
 					</div>
 				</div>
             </section>

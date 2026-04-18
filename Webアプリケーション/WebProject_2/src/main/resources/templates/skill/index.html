@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ユーザーリスト</title>
+  <meta name="_csrf" th:content="${_csrf.token}">
+  <meta name="_csrf_header" th:content="${_csrf.headerName}">	
+  <title>スキルリスト</title>
   <link rel="stylesheet" th:href="@{/css/global.css}" />
   <script defer th:src="@{/js/script.js}"></script>
 </head>
@@ -52,11 +54,20 @@
 							<td th:text="${skill.userName}"></td>
 							<td th:text="${skill.skill}"></td>
 							<td>
-								<button
+								<a  
+									th:if="${loginUser.role == 1 or loginUser.id == skill.userId}"
+									th:href="@{skill/edit/{skill_id}(skill_id=${skill.id})}"
+									class="btn btn-positive btn--sm">
+									編集
+								</a>
+							</td>
+							<td>
+								<a
+									th:if="${loginUser.role == 1 or loginUser.id == skill.userId}"
 									class="btn btn-negative btn--sm delete-skill-btn" 
 									th:data-id="${skill.id}">
 									削除
-								</button>
+								</a>
 							</td>
 						</tr>
                     </tbody>

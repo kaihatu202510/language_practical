@@ -4,13 +4,20 @@ public class Skill {
 	
 	private int id;
     private int userId;
-    private String skill;
+    private String name;
 
-    public Skill(int id, int userId, String skill) {
+    public Skill(int id, int userId, String name) {
     	this.id = id;
         this.userId = userId;
-        this.skill = skill;
+        this.name = name;
     }
+    
+    public Skill(int id, String name) {
+    	this.id = id;
+    	this.name = name;
+    }
+    
+    public Skill() {};
     
     public int getId() {
         return id;
@@ -20,7 +27,19 @@ public class Skill {
         return userId;
     }
 
-    public String getSkill() {
-        return skill;
+    public String getName() {
+        return name;
+    }
+    
+    public void setId(int id) {
+    	this.id = id;
+    }
+    
+    public void setUserId(int userId) {
+    	this.userId = userId;
+    }
+    
+    public void setName(String name) {
+    	this.name = name;
     }
 }

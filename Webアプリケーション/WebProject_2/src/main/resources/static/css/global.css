@@ -36,6 +36,8 @@ li {
 }
 
 .btn--sm{
+  font-size:14px;
+  text-align: center;
   padding: 8px;
 }
 
@@ -66,6 +68,16 @@ li {
 .btn-negative:hover{
   cursor: pointer;
   background-color: #9e4747;
+}
+
+.btn-primary{
+  background-color: #00AAFF;
+  color: white;
+}
+
+.btn-primary:hover{
+	cursor: pointer;
+	background-color: #008ED6;
 }
 
 .errorMessage{
@@ -135,8 +147,14 @@ li {
     transition: opacity 0.2s ease;
 }
 
+.nav-btn{
+	border: none;
+	background: none;
+}
+
 .nav-link:hover {
     opacity: 0.7;
+	cursor: pointer;
 }
 
 body{
@@ -223,11 +241,11 @@ body{
 }
 
 .display__list--users .list-row {
-  grid-template-columns: 40px 1fr 100px 50px; /* ID + 名前 + スキル登録ボタン + 削除ボタン*/
+  grid-template-columns: 40px 1fr 50px 50px 100px; /* ID + 名前 + 編集 + 削除ボタン + スキル登録ボタン　*/
 }
 
 .display__list--skills .list-row {
-  grid-template-columns: 1fr 1fr 50px; /* ユーザー名 + スキル名 */
+  grid-template-columns: 1fr 1fr 50px 50px; /* ユーザー名 + スキル名 + 編集 + 削除 */
 }
 
 .list-row {

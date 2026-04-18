@@ -9,7 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	getSkills();
 	createSkill();
+	updateSkill();
 	deleteSkill();
+	updateUser();
 });
 
 // ヘッダー及びフッター
@@ -44,17 +46,24 @@ function createUser(){
 	const btn = document.getElementById("createUserButton")
 	
 	if(!btn) return;
+	const token = document.querySelector('meta[name="_csrf"]').content;
+	const header = document.querySelector('meta[name="_csrf_header"]').content;
 	
 	btn.addEventListener("click", () => {
 		const name = document.getElementById("userNameInput").value;
+		const password = document.getElementById("userPasswordInput").value;
+		const role = document.getElementById("userRoleInput").value;
 		
 		fetch("http://localhost:8080/api/users", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				[header]: token
 			},
 			body: JSON.stringify({
-				name: name
+				name: name,
+				password: password,
+				role: role
 			})
 		})
 		.then(response => {
@@ -66,7 +75,7 @@ function createUser(){
 		})
 		.then(() => {
 			alert("登録成功");
-			location.href = "/";
+			location.href = "/users";
 		})
 		.catch(error => {
 		  alert(error.message);
@@ -74,20 +83,70 @@ function createUser(){
 	});
 }
 
+// ユーザー更新
+function updateUser(){
+		const btn = document.getElementById("updateUserButton");
+		
+		if(!btn) return;
+		
+		const token = document.querySelector('meta[name="_csrf"]').content;
+		const header = document.querySelector('meta[name="_csrf_header"]').content;
+			
+		btn.addEventListener("click", () => {
+			console.log("hello")
+
+			const name = document.getElementById("userNameInput").value;
+			const role = document.getElementById("userRoleInput").value;
+			const id = Number(btn.dataset.userId);
+
+			fetch(`http://localhost:8080/api/user/update/${id}`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					[header]:token
+				},
+				body: JSON.stringify({
+					id: id,
+					name: name,
+					role: role
+				})
+			})
+			.then(response => {
+			    if (!response.ok) {
+			        return response.text().then(message => {
+			            throw new Error(message);
+			        });
+			    }
+			})
+			.then(() => {
+				alert("更新成功");
+				location.href = "/users";
+			})
+			.catch(err => alert(err.message));
+		});
+	}
+
 // ユーザー一覧の行を削除
 function deleteUser(){
 	const tbody = document.getElementById("userTableBody");
 
 	if(!tbody) return;
-
+	
+	const token = document.querySelector('meta[name="_csrf"]').content;
+	const header = document.querySelector('meta[name="_csrf_header"]').content;
+	
 	tbody.addEventListener("click", (e) => {
-		if (!e.target.classList.contains("delete-user-btn")) return;
+		if (!e.target.classList.contains("updatete-user-btn")) return;
 
         const button = e.target;
         const id = button.dataset.id;
 
-        fetch("http://localhost:8080/api/users/" + id, {
-            method: "DELETE"
+        fetch("http://localhost:8080/api/user/update/" + id, {
+            method: "UPDATE",
+			headers:{
+				[header]:token
+			}
+			
         })
         .then(response => {
             if (!response.ok) {
@@ -238,11 +297,15 @@ function inactiveSortIcons(){
 // スキル登録
 function createSkill(){
 	const btn = document.getElementById("createSkillButton");
+	
 	if(!btn) return;
-
+	
+	const token = document.querySelector('meta[name="_csrf"]').content;
+	const header = document.querySelector('meta[name="_csrf_header"]').content;
+		
 	btn.addEventListener("click", () => {
 
-		const skill = document.getElementById("skillNameInput").value;
+		const name = document.getElementById("skillNameInput").value;
 		const userId = Number(btn.dataset.userId);
 		const errorMsgId = "errorMessageSkill";
 
@@ -251,11 +314,12 @@ function createSkill(){
 		fetch("http://localhost:8080/api/skills", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				[header]:token
 			},
 			body: JSON.stringify({
 				userId: userId,
-				skill: skill
+				name: name
 			})
 		})
 		.then(response => {
@@ -275,6 +339,46 @@ function createSkill(){
 	});
 }
 
+// スキル更新
+function updateSkill(){
+	const btn = document.getElementById("updateSkillButton");
+	
+	if(!btn) return;
+	
+	const token = document.querySelector('meta[name="_csrf"]').content;
+	const header = document.querySelector('meta[name="_csrf_header"]').content;
+		
+	btn.addEventListener("click", () => {
+
+		const name = document.getElementById("skillNameInput").value;
+		const id = Number(btn.dataset.skillId);
+
+		fetch(`http://localhost:8080/api/skills/edit/${id}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				[header]:token
+			},
+			body: JSON.stringify({
+				id: id,
+				name: name
+			})
+		})
+		.then(response => {
+		    if (!response.ok) {
+		        return response.text().then(message => {
+		            throw new Error(message);
+		        });
+		    }
+		})
+		.then(() => {
+			alert("更新成功");
+			location.href = "/skills";
+		})
+		.catch(err => alert(err.message));
+	});
+}
+
 
 
 // スキル一覧の行を削除
@@ -283,6 +387,9 @@ function deleteSkill(){
 	
 	if(!tbody) return;
 	
+	const token = document.querySelector('meta[name="_csrf"]').content;
+	const header = document.querySelector('meta[name="_csrf_header"]').content;
+		
 	tbody.addEventListener("click", (e) => {
 	    if (!e.target.classList.contains("delete-skill-btn")) return;
 	
@@ -291,7 +398,10 @@ function deleteSkill(){
 	    /*if (!confirm("本当に削除しますか？")) return;*/
 	
 	    fetch(`http://localhost:8080/api/skills/${id}`, {
-	        method: "DELETE"
+	        method: "DELETE",
+			headers:{
+				[header]:token
+			}
 	    })
 	    .then(response => {
 	        if (!response.ok) {

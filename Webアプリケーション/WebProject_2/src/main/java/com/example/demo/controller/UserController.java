@@ -5,9 +5,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,7 +23,7 @@ public class UserController {
     private UserService userService;
 	
 	// ユーザー一覧
-	@GetMapping("/")
+	@GetMapping("/users")
 	public String getUsers(
 			Model model,
 			@RequestParam(value = "keyword", required = false) String keyword,	
@@ -29,7 +31,9 @@ public class UserController {
 	) throws SQLException {
 
 		List<User> userList = userService.getUsers(keyword);
+		User loginUser = userService.getLoginUser();
 		
+		model.addAttribute("loginUser", loginUser);	
 		model.addAttribute("userList", userList);
 		
 		if ("XMLHttpRequest".equals(requestedWith)) { return
@@ -40,9 +44,19 @@ public class UserController {
 	}	
 	
 	// ユーザー作成画面
-	@GetMapping("/user/new")
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/admin/user/new")
 	public String newUser() {
 		return "user/new";
+	}
+	
+	// ユーザー編集画面
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/admin/user/edit/{id}")
+	public String editUser(Model model, @PathVariable("id") int id) throws SQLException{
+		User user = userService.getUser(id);
+		model.addAttribute("user", user);
+		return "user/edit";
 	}
 
 }
